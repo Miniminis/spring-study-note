@@ -126,3 +126,17 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/windows,eclipse,java-web
+Servers/Pivotal tc Server Developer Edition v4.0-config/catalina.policy
+Servers/Pivotal tc Server Developer Edition v4.0-config/catalina.properties
+Servers/Pivotal tc Server Developer Edition v4.0-config/context.xml
+Servers/Pivotal tc Server Developer Edition v4.0-config/jmxremote.access
+Servers/Pivotal tc Server Developer Edition v4.0-config/jmxremote.password
+Servers/Pivotal tc Server Developer Edition v4.0-config/server.xml
+Servers/Pivotal tc Server Developer Edition v4.0-config/tomcat-users.xml
+Servers/Pivotal tc Server Developer Edition v4.0-config/web.xml
+Servers/Tomcat v8.5 Server at localhost-config/catalina.policy
+Servers/Tomcat v8.5 Server at localhost-config/catalina.properties
+Servers/Tomcat v8.5 Server at localhost-config/context.xml
+Servers/Tomcat v8.5 Server at localhost-config/server.xml
+Servers/Tomcat v8.5 Server at localhost-config/tomcat-users.xml
+Servers/Tomcat v8.5 Server at localhost-config/web.xml
