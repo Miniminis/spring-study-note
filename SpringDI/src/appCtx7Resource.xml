@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<context:annotation-config/>
+	
+	<bean id="memberDao" class="member.MemberDao">
+		<!-- <qualifier value="memberDao"/> 
+		: register 와 changepw 서비스에 각각 다른 dao bean 객체 연결해줬더니 
+		컴파일오류는 나지 않았고, exception.MemberNotFoundException 발생 
+		: 왜냐하면 두 서비스가 서로 다른 dao 를 참조하고 있기 때문에 
+		register에서 신규로 등록한 정보가 changepw 변경에서는 찾아질 수 없음 -->
+	</bean>
+	<bean id="anotherMemberDao" class="member.MemberDao">
+		<qualifier value="qualifierForMemberDao" />
+	</bean>
+	
+	<bean id="registService" class="member.MemberRegisterService">
+	</bean>
+	
+	<bean id="chgPwService" class="member.ChangePasswordService" />
+	
+</beans>
+
+<!-- 두 어노테이션 모두 xml 파일에서는 bean 등록 후 : autowire or resource 이용해서 주입만! 
+- 그냥 service bean 객체를 다 지워버리니까 오류남 
+-->
+
+<!-- @Autowired 
+- 먼저 타입이 같은 빈 객체 검색 :  class="member.MemberDao"
+- 타입이 같은 빈 객체가 2개 이상이면:  @Qualifier 로 지정한 빈 객체를 찾는다. 
+						: <qualifier value="qualifierForMemberDao" />
+- 만약 Qualifier 가 없고 타입이 같은 객체가 2개 이상 존재하면 : 이름이 같은 빈 객체 찾는다. 
+				:@Autowired(required = false) private MemberDao memberDao;
+*** 질문: 콘솔창에서 만들어지는 bean 객체의 결과 
+memberDao,anotherMemberDao,registService,chgPwService
+가 출력되는데: 그럼 객체는 모두 만들어지되, 참조할때만 같은 이름을 찾는 건가용?
+-->
+
+<!-- @Resource 
+- 먼저 빈의 이름을 이용해서 주입할 객체를 검색 : 이름을 명확하게 지정  
+- name 속성 없으면 타입이 같은 빈 객체 찾는다. 
+- Qualifier 이용 
+
+  -->
+  
+  <!-- 명시적 의존주입 (resourse) > 자동주입(autowired) -->
+

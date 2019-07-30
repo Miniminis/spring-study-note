@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+   
+	<bean id="memberDao" class="member.MemberDao"/>
+
+	<bean 
+		id="registService" 
+		class="member.MemberRegisterService"
+		autowire="byName"
+	/>
+	<!-- scope="singleton" scope="prototype" scope="session" -->
+	
+	<!-- <bean id="member123" class="member.MemberDao"/> 
+	bean 의 아이디가 달라진다면, byName 으로 찾을 수 없음. 주입 불가 -->
+	
+	
+	<bean 
+		id="chgPwService"  
+		class="member.ChangePasswordService"
+		autowire="byType"
+	/>
+	
+	<!-- Dao 타입의 객체가 두 개 이상일 경우에는 아예 컴파일 조차 불가 : 에러발생 -->
+	
+	
+	
+</beans>
+

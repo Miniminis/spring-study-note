@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<import resource="classpath:appCtx3.xml"/>
+
+	<!-- 스프링 DI 설정 방법 2: 프로퍼티 방식 이용 -->
+	<!-- <bean id="registService" class="member.MemberRegisterService">
+		<property name="memberDao"> setMemberDao() 매서드 호출  
+			<ref bean="memberDao"/> bean 식별 아이디 
+		</property>
+	</bean>
+	
+	<bean id="chgPwService"  class="member.ChangePasswordService">
+		<property name="memberDao"> 
+			<ref bean="memberDao"/> 
+		</property>
+	</bean> -->
+	
+	
+	<!-- ■ 스프링의 DI 설정 : XML 네임스페이스를 이용한 프로퍼티 설정 -->
+	<bean 
+		id="registService" 
+		class="member.MemberRegisterService"
+		p:memberDao-ref="memberDao"
+	/>
+	
+	<bean 
+		id="chgPwService"  
+		class="member.ChangePasswordService"
+		p:memberDao-ref="memberDao"
+	/>
+	
+	<!-- ■ 의존관계 설정 : 임의 빈 객체 전달 -->
+	<!-- <bean id="chgPwService"  class="member.ChangePasswordService">
+		<property name="memberDao"> 
+			<bean class="member.MemberDao"></bean> 
+			위의 bean 객체와 다른 객체! 방금 만든 새로운 객체임  
+		</property>
+	</bean> -->
+	
+	
+	
+	
+</beans>
+
+
+<!-- 
+
+* import 태그의 기능 : 
+- 다른 설정 파일을 xml 내부로 import 할 수 있다! 
+- 협업 과정에서 xml 파일을 수정하지 않고 import 태그만 추가한다면 다른 동료들의 설정파일을 사용할 수 있다  
+
+* lookup-method 
+- 추상매서드의 인스턴스 생성을 도와줌 
+
+-->
+
