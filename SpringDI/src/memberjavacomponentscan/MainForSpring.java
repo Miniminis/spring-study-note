@@ -1,10 +1,11 @@
-package member;
+package memberjavacomponentscan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import exception.AlreadyExistingMemberException;
@@ -12,19 +13,13 @@ import exception.IdPasswordNotMatchingException;
 import exception.MemberNotFoundException;
 
 public class MainForSpring {
-	
-	//private static Assembler assembler = new Assembler();
-	
-	//스프링 컨테이너 생성 : 조립기 설정파일 == appCtx1.xml 
-	//appCtx1.xml 설정 파일을 읽어 객체 관리
-	//private static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx1Constructor.xml");
-	//private static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx2Property.xml");
-	//private static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx4AutoWire.xml");
-	//private static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx5Scope.xml");
-	//private static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx6Annotation.xml");	
-	//private static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx7Resource.xml");
-	private static ApplicationContext ctx = new GenericXmlApplicationContext("classpath:appCtx8Component.xml");
-	
+		
+	private static ApplicationContext ctx = 
+			//new AnnotationConfigApplicationContext(AppContext.class);
+			//new AnnotationConfigApplicationContext(AppContext01.class);
+			//new AnnotationConfigApplicationContext(AppContext01.class, AppContext02.class);
+			new AnnotationConfigApplicationContext(AppContextComponent.class);
+			
 	public static void main(String[] args) throws IOException {
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -40,7 +35,8 @@ public class MainForSpring {
 			}
 			
 			if(command.startsWith("신규")) {
-				processNewCommand(command.split(" ")); //split() 첨자로 문자열 잘라주기  //신규 minhee@ddd 1111 minheeSon 
+				processNewCommand(command.split(" ")); 
+				//split() 첨자로 문자열 잘라주기  //신규 minhee@ddd 1111 minheeSon 
 			}
 			
 			if(command.startsWith("변경")) {
@@ -57,8 +53,7 @@ public class MainForSpring {
 			return;
 		}
 		
-		//MemberRegisterService service = assembler.getRegisterService();	//의존성을 낮춘 구조 : assembler 이용해서 직접 객체 생성 및 참조하지 않게됨 
-		MemberRegisterService service = ctx.getBean("registService", MemberRegisterService.class);
+		MemberRegisterService service = ctx.getBean("registServiceJavaComponent", MemberRegisterService.class);
 		RegisterRequest regrequest = new RegisterRequest();
 		
 		regrequest.setUseremail(args[1]);
@@ -88,8 +83,7 @@ public class MainForSpring {
 			return;
 		}
 		
-		//ChangePasswordService service = assembler.getChgPwService();
-		ChangePasswordService service = ctx.getBean("chgPwService", ChangePasswordService.class);
+		ChangePasswordService service = ctx.getBean("chgPwServiceJavaComponent", ChangePasswordService.class);
 		try {
 			service.changePassword(args[1], args[2], args[3]);
 			System.out.println("비밀번호 변경이 완료되었습니다*^^*");

@@ -1,4 +1,4 @@
-package member;
+package memberannotation;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 
-public class MainForSpringScope {
+public class MainForScope {
 	
 	//private static Assembler assembler = new Assembler();
 	

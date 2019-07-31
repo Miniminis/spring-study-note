@@ -1,4 +1,4 @@
-package member;
+package memberassembler;
 
 public class Assembler {
 	

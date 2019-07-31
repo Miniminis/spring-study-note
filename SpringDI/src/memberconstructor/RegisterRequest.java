@@ -1,4 +1,4 @@
-package member;
+package memberconstructor;
 
 public class RegisterRequest {
 	

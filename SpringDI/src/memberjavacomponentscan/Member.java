@@ -1,4 +1,4 @@
-package member;
+package memberjavacomponentscan;
 
 import java.util.Date;
 

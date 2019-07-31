@@ -39,7 +39,7 @@
 				:@Autowired(required = false) private MemberDao memberDao;
 *** 질문: 콘솔창에서 만들어지는 bean 객체의 결과 
 memberDao,anotherMemberDao,registService,chgPwService
-가 출력되는데: 그럼 객체는 모두 만들어지되, 참조할때만 같은 이름을 찾는 건가용?
+가 출력되는데: 그럼 객체는 모두 만들어지되, 참조할때만 같은 이름을 찾는 건가용? : 그렇습니다! 
 -->
 
 <!-- @Resource 

@@ -1,4 +1,4 @@
-package member;
+package memberassembler;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -7,8 +7,6 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-//@Component("memberDaoWithName")
-@Repository("memberDaoUsingRepository") //Dao에서는 보통 @Repository 이용하여 bean 객체로 등록 
 public class MemberDao{
 	
 	private static long nextId=0;

@@ -1,19 +1,21 @@
-package member;
+package memberjavaconstructor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
 import exception.AlreadyExistingMemberException;
 import exception.IdPasswordNotMatchingException;
 import exception.MemberNotFoundException;
 
-public class MainForAssembler {
-	
-	private static Assembler assembler = new Assembler();
-	
-	//위의 assembler 객체 덕분에 다음과 같은 코드도 가능해진다. 
-	//private static MemberRegisterService registerService = assembler.getRegisterService();
+public class MainForSpring {
+		
+	private static ApplicationContext ctx = 
+			new AnnotationConfigApplicationContext(AppContext.class);
 	
 	public static void main(String[] args) throws IOException {
 		
@@ -30,7 +32,8 @@ public class MainForAssembler {
 			}
 			
 			if(command.startsWith("신규")) {
-				processNewCommand(command.split(" ")); //split() 첨자로 문자열 잘라주기  //신규 minhee@ddd 1111 minheeSon 
+				processNewCommand(command.split(" ")); 
+				//split() 첨자로 문자열 잘라주기  //신규 minhee@ddd 1111 minheeSon 
 			}
 			
 			if(command.startsWith("변경")) {
@@ -47,7 +50,7 @@ public class MainForAssembler {
 			return;
 		}
 		
-		MemberRegisterService service = assembler.getRegisterService();	//의존성을 낮춘 구조 : assembler 이용해서 직접 객체 생성 및 참조하지 않게됨 
+		MemberRegisterService service = ctx.getBean("registServiceJava", MemberRegisterService.class);
 		RegisterRequest regrequest = new RegisterRequest();
 		
 		regrequest.setUseremail(args[1]);
@@ -77,7 +80,7 @@ public class MainForAssembler {
 			return;
 		}
 		
-		ChangePasswordService service = assembler.getChgPwService();
+		ChangePasswordService service = ctx.getBean("chgPwServiceJava", ChangePasswordService.class);
 		try {
 			service.changePassword(args[1], args[2], args[3]);
 			System.out.println("비밀번호 변경이 완료되었습니다*^^*");
