@@ -1,4 +1,4 @@
-package com.springstudynote.firstapp;
+package com.springproject.mvc;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -22,7 +22,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -32,9 +32,8 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		//컨트롤러로 보내주는 택배와 같은 역할! 
-		//return "home";
-		return "/member/index";  //		/WEB-INF/view/member/ + index + .jsp 
+		
+		return "home";
 	}
 	
 }
