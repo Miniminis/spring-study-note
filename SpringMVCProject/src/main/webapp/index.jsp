@@ -27,7 +27,8 @@
 		<li><a href='<c:url value="/header/getheader"/>'>Header Referer</a></li>
 		<li><a href='<c:url value="/search/search"/>'>@ModelAttribute 의 유용성!!!!</a></li>
 		<li><a href='<c:url value="/search/search2"/>'>@ModelAttribute 의 유용성2!!!!</a></li>
-		
+		<li><a href='<c:url value="/fileupload/uploadForm"/>'>FileUpload </a></li>
+		<li><a href="#">보고싶은지현뚜♥</a></li>
 		<hr>
 		<li><a href="write">회원등록</a></li>
 		<li><a href="view">회원리스트 보기</a></li>
