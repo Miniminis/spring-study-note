@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta charset="UTF-8">
@@ -23,6 +24,11 @@
 	<ul>
 		<li><a href="hello">/hello</a></li>
 		<li><a href="homeDBTest">MYSQL DB와 연결된 페이지</a></li>
+		<li><a href='<c:url value="/header/getheader"/>'>Header Referer</a></li>
+		<li><a href='<c:url value="/search/search"/>'>@ModelAttribute 의 유용성!!!!</a></li>
+		<li><a href='<c:url value="/search/search2"/>'>@ModelAttribute 의 유용성2!!!!</a></li>
+		
+		<hr>
 		<li><a href="write">회원등록</a></li>
 		<li><a href="view">회원리스트 보기</a></li>
 	</ul>

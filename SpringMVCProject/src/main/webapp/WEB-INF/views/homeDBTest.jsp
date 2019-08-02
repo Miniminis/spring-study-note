@@ -12,5 +12,6 @@
 </h1>
 
 <P>  Memberinfo 테이블에서 가져온 userid :  ${userid}. </P>
+<a href='<c:url value="/header/getheader"/>'>Header Referer</a>
 </body>
 </html>
