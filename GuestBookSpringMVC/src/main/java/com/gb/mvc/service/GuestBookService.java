@@ -3,12 +3,13 @@ package com.gb.mvc.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import com.gb.mvc.dao.MessageDao;
 import com.gb.mvc.exception.InvalidMessagePasswordException;
@@ -110,11 +111,13 @@ public class GuestBookService {
 		return view;
 	}
 	//글삭제
-	public void delete (int mid, String pw) {
+	public Map<String, Object> delete (int mid, String pw) {
 		
 		int resultCnt = 0; //삭제 실행 결과담을 변수 설정 
 		boolean chk = false; //비밀번호 유효성 검사 결과 담은 체크 결과 담을 변수 설정  
 		String msg = ""; //삭제 실행 결과에 따라 다른 메시지 출력 
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
 			resultCnt = deleteMessage(mid, pw);
@@ -131,6 +134,12 @@ public class GuestBookService {
 			msg = e.getMessage();
 		}
 		
+		
+		map.put("resultCnt", resultCnt);
+		map.put("chk", chk);
+		map.put("msg", msg);
+		
+		return map;
 	}
 	
 	public int deleteMessage(int mId, String pw) throws SQLException, MessageNotFoundException, InvalidMessagePasswordException {
