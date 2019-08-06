@@ -1,0 +1,27 @@
+﻿ERROR : MySQL 서비스가 로컬 컴퓨터에서 시작했다가 중지되었습니다 
+
+해결 : 레지스트리에서 mysql 서비스 전부 삭제한 후, 콘솔창 통해서 다시 install 함 
+--> 정상작동 
+
+
+
+***
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+
+방법 1) 
+http://learnmysql.blogspot.com/2012/07/reset-mysql-root-password-in-windows.html
+
+
+
+방법 2) 
+Just encountered exact same issue on mac. I was able to reset the root password with following steps.
+
+mysqld --skip-grant-tables  # this will run mysql 
+
+mysql -u root
+mysql> FLUSH PRIVILEDGES;
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpassword';
+
+
+--> 실패 
