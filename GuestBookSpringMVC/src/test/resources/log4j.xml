@@ -31,11 +31,15 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
-
+	
+	<!-- JDCB DEBUG 레벨에 있는 에러 처리 : jdbc 를 통해 처리되고 있는 모든 과정을 콘솔창에서 확인 가능-->
+	<logger name="org.springframework.jdbc">
+		<level value="DEBUG" />
+	</logger>
+	
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
-	
 </log4j:configuration>

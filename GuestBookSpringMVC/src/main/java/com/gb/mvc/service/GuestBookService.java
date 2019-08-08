@@ -1,46 +1,36 @@
 package com.gb.mvc.service;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gb.mvc.dao.MessageDao;
+import com.gb.mvc.dao.MessageJDBCTemplateDao;
 import com.gb.mvc.exception.InvalidMessagePasswordException;
 import com.gb.mvc.exception.MessageNotFoundException;
 import com.gb.mvc.model.Message;
 import com.gb.mvc.model.MessageListView;
 
-@Service
+@Service("gbservice")
 public class GuestBookService {
 	
 	@Autowired
-	BasicDataSource dataSource;
+	private MessageJDBCTemplateDao jdbcTemplateDao;
+	
 	
 	//글등록
 	public void write(Message message) {
+							
+		int rscnt = jdbcTemplateDao.insert(message); 
 		
-		Connection conn;
-		
-		try {
-			conn = dataSource.getConnection();
-			
-			MessageDao dao = MessageDao.getInstance();
-			int rscnt = dao.insert(conn, message);
-			
-			System.out.println("service"+message.getGname());
-			System.out.println("2"+rscnt);
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}		
+		System.out.println("===writeService rscnt: "+rscnt);
+	
 	}
+	
 	
 	//글리스트출력
 	public MessageListView getList(int page) {
@@ -64,52 +54,39 @@ public class GuestBookService {
 		//2. 현재페이지 번호 
 		int curretPageNumber = pageNumber;
 		
-		//connection
-		Connection conn;
+		//전체 게시물의 개수 
+		int messageTotalCnt = jdbcTemplateDao.selectCnt();
+						
+		//게시물 내용 리스트, DB 검색에 사용할 startRow, endRow
+		List<Message> messageList = null;
+		int startRow = 0;
+		int endRow=0;
+			
+		if(messageTotalCnt >0) {
+			
+			//파라미터로 넘겨받은 pageNumber 에 따라서 게시판 리스트의 시작로우와 끝 로우가 정해진다.
+			startRow = (pageNumber -1)*MESSAGE_COUNT_PER_PAGE;
+			endRow = startRow + MESSAGE_COUNT_PER_PAGE -1;
+			
+			messageList = jdbcTemplateDao.selectList(startRow, endRow);
+			
+		} else {
+			curretPageNumber = 0;
+			messageList = Collections.emptyList();
+		}
 		
-		
-		try {
-			//Connection
-			conn = dataSource.getConnection();
-			
-			//DAO
-			MessageDao dao = MessageDao.getInstance();
-			
-			//전체 게시물의 개수 
-			int messageTotalCnt = dao.selectCnt(conn);
-			
-			//게시물 내용 리스트, DB 검색에 사용할 startRow, endRow
-			List<Message> messageList = null;
-			int startRow = 0;
-			int endRow=0;
-			
-			if(messageTotalCnt >0) {
-				
-				//파라미터로 넘겨받은 pageNumber 에 따라서 게시판 리스트의 시작로우와 끝 로우가 정해진다.
-				startRow = (pageNumber -1)*MESSAGE_COUNT_PER_PAGE +1;
-				endRow = startRow + MESSAGE_COUNT_PER_PAGE -1;
-				
-				messageList = dao.selectList(conn, startRow, endRow);
-				
-			} else {
-				curretPageNumber = 0;
-				messageList = Collections.emptyList();
-			}
-			
-			view = new MessageListView(
-					messageTotalCnt, 
-					curretPageNumber, 
-					messageList, 
-					MESSAGE_COUNT_PER_PAGE, 
-					startRow, 
-					endRow
-					);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
+		view = new MessageListView(
+				messageTotalCnt, 
+				curretPageNumber, 
+				messageList, 
+				MESSAGE_COUNT_PER_PAGE, 
+				startRow, 
+				endRow
+				); 
 		
 		return view;
 	}
+	
 	//글삭제
 	public Map<String, Object> delete (int mid, String pw) {
 		
@@ -143,60 +120,31 @@ public class GuestBookService {
 	}
 	
 	public int deleteMessage(int mId, String pw) throws SQLException, MessageNotFoundException, InvalidMessagePasswordException {
+				
+		//1. 전달받은 게시물 아이디 mId로 게시물 확인
+		//- MessageDao 필요 --> 원하는 게시물 선택 select() 
+		Message message = jdbcTemplateDao.select(mId);
 		
-		int resultCnt = 0;
-		Connection conn = null;
+			
+		//2. 게시물이 존재하지 않으면 예외처리 
+		if(message == null) {
+			throw new MessageNotFoundException(mId+"번 메시지가 존재하지 않습니다.");
+		}
 		
-		try {
-			conn = dataSource.getConnection();
-			
-			//트랜잭션 시작
-			conn.setAutoCommit(false);
-			
-			//1. 전달받은 게시물 아이디 mId로 게시물 확인
-			//- MessageDao 필요 --> 원하는 게시물 선택 select() 
-			MessageDao dao = MessageDao.getInstance();
-			Message message = dao.select(conn, mId);
-			
-			//2. 게시물이 존재하지 않으면 예외처리 
-			if(message == null) {
-				throw new MessageNotFoundException(mId+"번 메시지가 존재하지 않습니다.");
-			}
-			
-			//3. 게시물이 존재하면 비밀번호 확인 (존재 여부 있다, 없다 ) --> 없으면 예외처리  
-			//4. 비밀번호가 존재하면 --> 비밀번호가 존재하지 않거나 사용자 비밀번호가 틀린 경우에 대해 예외처리
-			if(!message.hasPassword()) {
-				throw new InvalidMessagePasswordException("비밀번호가 일치하지 않습니다.");
-			}
-			
-			//비밀번호 비교
-			if(!message.matchPassword(pw)) {
-				throw new InvalidMessagePasswordException("비밀번호가 일치하지 않습니다.");
-			}
+		//3. 게시물이 존재하면 비밀번호 확인 (존재 여부 있다, 없다 ) --> 없으면 예외처리  
+		//4. 비밀번호가 존재하면 --> 비밀번호가 존재하지 않거나 사용자 비밀번호가 틀린 경우에 대해 예외처리
+		if(!message.hasPassword()) {
+			throw new InvalidMessagePasswordException("비밀번호가 일치하지 않습니다.");
+		}
+		
+		//비밀번호 비교
+		if(!message.matchPassword(pw)) {
+			throw new InvalidMessagePasswordException("비밀번호가 일치하지 않습니다.");
+		}
 			 
-			
-			//5. 비밀번호가 존재하고 일치한다면 --> 정상처리 commit 
-			resultCnt = dao.deleteMessage(conn, mId);
-			
-			//트랜잭션 종료 : 정상처리
-			conn.commit(); 
-			
-		} catch (SQLException e) {
-			//트랜잭션의 롤백: 마지막 커밋 위치로 이동 
-			dataSource.getConnection().rollback();
-			e.printStackTrace();
-			throw e;
-		} catch (MessageNotFoundException e) {
-			dataSource.getConnection().rollback();;
-			e.printStackTrace();
-			throw e;
-		} catch (InvalidMessagePasswordException e) {
-			dataSource.getConnection().rollback();;
-			e.printStackTrace();
-			throw e;
-		}  
-		
-		return resultCnt;
+		//5. 비밀번호가 존재하고 일치한다면 --> 정상처리 commit 
+		return jdbcTemplateDao.deleteMessage(mId); 
 		
 	}
+	
 }

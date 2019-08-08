@@ -24,7 +24,6 @@ public class GuestBookController {
 	@Autowired
 	GuestBookService gbservice;
 	
-	
 	//메인페이지 && 글리스트 출력
 	@RequestMapping("/gbmain") 
 	public String getMain(HttpServletRequest request, Model model) {
@@ -59,7 +58,7 @@ public class GuestBookController {
 	@RequestMapping(value="/guestWrite", method = RequestMethod.POST)
 	public String writeMessage(Message message) {
 		
-		System.out.println(message.getGname());
+		System.out.println("====SERVICE WRITE===="+message.getGname()+"======");
 		
 		gbservice.write(message);
 		
@@ -91,9 +90,9 @@ public class GuestBookController {
 		resultMap = gbservice.delete(mid, pw);
 		
 		model.addAllAttributes(resultMap);
-		System.out.println(resultMap.get("chk"));
-		System.out.println(resultMap.get("msg"));
-		System.out.println(resultMap.get("resultCnt"));
+		System.out.println("======deleteController chk===="+resultMap.get("chk"));
+		System.out.println("======deleteController msg===="+resultMap.get("msg"));
+		System.out.println("======deleteController resultCnt===="+resultMap.get("resultCnt"));
 				
 		return "p05delResult";
 	}

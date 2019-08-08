@@ -24,5 +24,4 @@
 	<context:component-scan base-package="com.gb.mvc" />
 	
 	
-	
 </beans:beans>
