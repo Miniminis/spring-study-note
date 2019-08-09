@@ -3,7 +3,6 @@ package com.gb.mvc.model;
 //DB 와 연결 - 테이블에서 가져온 데이터들을 저장하는 클래스 
 public class Message {
 	
-	
 	private int message_id;
 	private String gname;
 	private String gpassword;
@@ -19,7 +18,6 @@ public class Message {
 		this.gpassword = gpassword;
 		this.gmessage = gmessage;
 	}
-
 
 
 	//getters & setters 

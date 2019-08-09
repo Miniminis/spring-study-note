@@ -47,27 +47,14 @@ public class GuestBookController {
 		model.addAttribute("list", view);
 		
 		return "p03List";
-	}
-	
-	
-	//메인페이지 && 글리스트 출력 - JSON 형식 
-	@RequestMapping("/gbmain/JSON") 
-	@ResponseBody
-	public MessageListView getMain(@RequestParam(
-									value = "page", 
-									defaultValue = "1") int page) {
-		
-		MessageListView view = gbservice.getList(page);
-		System.out.println("===view"+view);			
-		return view;
-	}
+	}	
 	
 	//글쓰기 폼
 	@RequestMapping("/guestWriteForm")
 	public String writeForm() {
 		return "p01writeForm";
 	}
-	
+
 	//글등록
 	@RequestMapping(value="/guestWrite", method = RequestMethod.POST)
 	public String writeMessage(Message message) {
@@ -78,6 +65,7 @@ public class GuestBookController {
 		
 		return "redirect:/gbmain";
 	}
+
 
 	
 	//글 삭제폼
@@ -110,5 +98,66 @@ public class GuestBookController {
 				
 		return "p05delResult";
 	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////JSON - AJAX로 싱글페이지에서 화면 처리 /////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////
+
+	
+	//메인페이지 && 글리스트 출력 - JSON 형식 
+	@RequestMapping("/gbmain/JSON") 
+	@ResponseBody
+	public MessageListView getMain(@RequestParam(
+									value = "page", 
+									defaultValue = "1") int page) {
+		
+		MessageListView view = gbservice.getList(page);
+		System.out.println("===view"+view);			
+		return view;
+	}
+	
+	//글등록
+	@RequestMapping(value="/guestWrite/JSON", method = RequestMethod.POST)
+	@ResponseBody
+	public String writeMessageJSON(Message message) {
+		
+		System.out.println("====SERVICE WRITE===="+message.getGname()+"======");
+		
+		gbservice.write(message);
+		
+		return "redirect:/gbmain/JSON";
+	}
+	
+	//글 삭제폼
+	/*@RequestMapping("/guestDelForm/JSON")
+	public String delMessageForm(
+			@RequestParam("messageId") int mid,
+			Model model) {
+		
+		model.addAttribute("messageId", mid);
+		
+		return "p04delForm";
+	}
+	
+	//글삭제
+	@RequestMapping(value = "/guestDel/JSON", method = RequestMethod.POST)
+	public String delMessage(
+			@RequestParam("messageId") int mid, 
+			@RequestParam("passwordConfirm") String pw,
+			Model model
+			) {
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap = gbservice.delete(mid, pw);
+		
+		model.addAllAttributes(resultMap);
+		System.out.println("======deleteController chk===="+resultMap.get("chk"));
+		System.out.println("======deleteController msg===="+resultMap.get("msg"));
+		System.out.println("======deleteController resultCnt===="+resultMap.get("resultCnt"));
+				
+		return "p05delResult";
+	}*/
 	
 }

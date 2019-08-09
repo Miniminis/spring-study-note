@@ -24,16 +24,40 @@
 		border: 2px solid #333;
 	}
 	.paging {
-		cursor: pointer;
+		cursor: pointer; 
 	}
-	
+
 </style>
 </head>
 <body>
 	
+	<h2>방명록 글쓰기</h2>
 	<hr>
 	
-	<a href="<c:url value="/guestWriteForm"/>">새로운 글 등록하기</a>
+	<form action="<c:url value='/guestWrite/JSON'/>" method="post">
+		<table>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="gname"></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="gpassword"></td>
+			</tr>
+			<tr>
+				<td>메시지</td>
+				<td><textarea rows="3" cols="30" name="gmessage"></textarea></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="등록하기"></td>
+			</tr>
+		</table>
+	</form>
+	
+	<hr>
+	
+	<a href="<c:url value=""/>">새로운 글 등록하기</a>
 	
 	<hr>
 	
@@ -46,6 +70,7 @@
 	</p>	
 	
 	<hr>
+	
 <script>
 
 	$(document).ready(function(){
@@ -64,6 +89,7 @@
 					//alert(data.messageTotalCnt); //js 타입 객체를 .으로 직접참조 가능! 
 					//alert(JSON.stringify(data)); //JSON 문자열 타입으로 형변환 
 
+					//html 처리 
 					var output='';
 					
 					var list = data.messageList;
@@ -80,10 +106,12 @@
 						output += '<td>손님이름 : '+gname+'</td>';
 						output += '<td>메시지 : '+gmessage+'</td>';
 						output += '<td>비밀번호: '+gpassword+'</td>';
+						output += '<td><a href="guestDelForm?messageId='+message_id+'"></a></td>';
 						output += '</tr></table></div>';
 						
 					};
 					
+					//페이징 처리 
 					var paging='';
 						
 					for(var j=1; j<data.pageTotalCnt+1; j++) {
