@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gb.mvc.model.Message;
 import com.gb.mvc.model.MessageListView;
@@ -46,6 +47,19 @@ public class GuestBookController {
 		model.addAttribute("list", view);
 		
 		return "p03List";
+	}
+	
+	
+	//메인페이지 && 글리스트 출력 - JSON 형식 
+	@RequestMapping("/gbmain/JSON") 
+	@ResponseBody
+	public MessageListView getMain(@RequestParam(
+									value = "page", 
+									defaultValue = "1") int page) {
+		
+		MessageListView view = gbservice.getList(page);
+		System.out.println("===view"+view);			
+		return view;
 	}
 	
 	//글쓰기 폼

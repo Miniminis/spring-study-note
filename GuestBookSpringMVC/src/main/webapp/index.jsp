@@ -17,5 +17,6 @@
 	<h1>INDEX PAGE</h1>
 	<a href="mysqlTest">/mysqlTest</a><br>
 	<a href="gbmain">GUESTBOOK PROJECT</a>
+	<a href="gbmain/JSON">GUESTBOOK PROJECT</a>
 </body>
 </html>
