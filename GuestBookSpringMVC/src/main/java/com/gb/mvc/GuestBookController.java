@@ -113,7 +113,7 @@ public class GuestBookController {
 									defaultValue = "1") int page) {
 		
 		MessageListView view = gbservice.getList(page);
-		System.out.println("===view"+view);			
+		//System.out.println("===view"+view);			
 		return view;
 	}
 	
