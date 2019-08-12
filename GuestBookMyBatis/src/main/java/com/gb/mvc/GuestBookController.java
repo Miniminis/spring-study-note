@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gb.mvc.model.Message;
-import com.gb.mvc.model.MessageJSONForm;
+import com.gb.mvc.model.MessageJSON;
 import com.gb.mvc.model.MessageListView;
 import com.gb.mvc.service.GuestBookService;
 
@@ -61,7 +61,7 @@ public class GuestBookController {
 	@RequestMapping(value="/guestWrite", method = RequestMethod.POST)
 	public String writeMessage(Message message) {
 		
-		System.out.println("====SERVICE WRITE===="+message.getGname()+"======");
+		System.out.println("====CONTROLLER WRITE===="+message.getGname()+"======");
 		
 		gbservice.write(message);
 		
@@ -121,14 +121,15 @@ public class GuestBookController {
 	
 	//글등록
 	@RequestMapping(value="/guestWrite/JSON", method = RequestMethod.POST)
-	public @ResponseBody int writeMessageJSON(@RequestBody MessageJSONForm message) {
-		System.out.println("@RequestBody"+message.toString());
-		//System.out.println("==JSON SERVICE WRITE=="+message.getGname()+"===");
+	@ResponseBody
+	public int writeMessageJSON(Message message) {
+		//JSON 데이터를 DTO 와 맵핑 : @RequestBody MessageJSONForm messageJSON
+		//System.out.println("form submit 넘어왔니?");
+		System.out.println("==JSON CONTROLLER MESSAGE"+message.toString());
 		
-		//int rscnt = gbservice.write(message);
+		int rscnt = gbservice.write(message);
 		
-		//return rscnt;
-		return 0;
+		return rscnt;
 	}
 	
 	//글 삭제폼

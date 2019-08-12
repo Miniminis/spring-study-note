@@ -1,41 +1,43 @@
 package com.gb.mvc.model;
 
-//DB 와 연결 - 테이블에서 가져온 데이터들을 저장하는 클래스 
-public class MessageJSONForm {
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+//JSON 문자열 형태로 넘겨진 form 데이터들을 받는 클래스 
+//@JsonDeserialize(using = MessageDeserializer.class)
+public class MessageJSON {
 	
 	private String gname;
 	private String gpassword;
 	private String gmessage;
 	
 	//default 생성자 
-	public MessageJSONForm() {}	
+	public MessageJSON() {}	
 
-	public MessageJSONForm(String gname, String gpassword, String gmessage) {
+	public MessageJSON(String gname, String gpassword, String gmessage) {
 		this.gname = gname;
 		this.gpassword = gpassword;
 		this.gmessage = gmessage;
 	}
-
 
 	//getters & setters 
 	public String getGname() {
 		return gname;
 	}
 
-	public void setGname(String gname) {
-		this.gname = gname;
-	}
-
 	public String getGpassword() {
 		return gpassword;
 	}
 
-	public void setGpassword(String gpassword) {
-		this.gpassword = gpassword;
-	}
-
 	public String getGmessage() {
 		return gmessage;
+	}
+	
+	public void setGname(String gname) {
+		this.gname = gname;
+	}
+
+	public void setGpassword(String gpassword) {
+		this.gpassword = gpassword;
 	}
 
 	public void setGmessage(String gmessage) {

@@ -21,7 +21,8 @@
 	}
 	
 	#writeArea {
-		margin: 0px 200px;
+		width: 100%;
+		padding: 0px 300px;
 	}
 	
 	.paging {
@@ -59,10 +60,9 @@
 			    <span class="input-group-text">메시지</span>
 			  </div>
 			  <textarea name="gmessage" class="form-control" aria-label="With textarea"></textarea>
-			</div>
+			</div>			
 		</form>
 		<button onclick="submitMsgForm()" class="btn btn-light mr-10">메시지등록</button>
-		
 		<hr>
 	</div>
 	
@@ -130,16 +130,21 @@
 	
 	/* 게시글 등록 */
 	function submitMsgForm() {
-		var msgFormData = JSON.stringify($('#writeMsgForm').serialize());
-		var msgFormData2 = $('#writeMsgForm').serialize();
-		alert(msgFormData);
-		//alert($('#writeMsgForm').serialize());
+		//var msgFormData = JSON.stringify($('#writeMsgForm').serialize());
+		var msgFormData = $('#writeMsgForm').serialize();
+		/*var msgFormData = {
+				gname : "minhww",
+				gpassword : "1111",
+				gmessage : "12345678"
+				
+		}*/
+		//alert(msgFormData);
 		$.ajax({
 			url: 'guestWrite/JSON',
 			type: 'post',
 			data: msgFormData,
-			dataType: 'json',
-			contentType:'application/json;charset=UTF-8',
+			//dataType: 'json',
+			//contentType:'application/json;charset=UTF-8',
 			success: function(data){
 				//성공여부 결과값이 data에 담겨 전달됨 
 				if(data>0) {
@@ -147,15 +152,15 @@
 				} else {
 					alert(data+'개의 메시지 등록에 실패하였습니다!');
 				}
-				//pageview(1); //바뀐 데이터 결과 적용된 리스트 재출력 (redirect 의 기능)
+				pageview(1); //바뀐 데이터 결과 적용된 리스트 재출력 (redirect 의 기능)
 			}, 
 			error: function(){
-                alert("등록실패얌 ㅠㅠㅠ 불짱 ㅠㅠㅠ");
+                alert("메세지 등록 실패에요 ㅠㅠㅠㅠ왜죠?");
             }
-		
 		});
 		
 	}
+	
 	/* 게시글 삭제 */
 
 </script>
