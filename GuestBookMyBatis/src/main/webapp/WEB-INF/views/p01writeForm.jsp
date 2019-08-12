@@ -4,43 +4,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Insert title here</title>
 <style>
+
 	body {
-		margin: 200px;
 		text-align: center;
 	}
-	table {
-		margin: 0 auto;
+	
+	#writeArea {
+		margin: 100px 300px;
+		text-align: center;
 	}
 	
-
-</style>
-
-</head>
-<body>
-	<h2>방명록 글쓰기</h2>
-	<hr>
-	<form action="guestWrite" method="post">
-		<table>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" name="gname"></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="gpassword"></td>
-			</tr>
-			<tr>
-				<td>메시지</td>
-				<td><textarea rows="3" cols="30" name="gmessage"></textarea></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="등록하기"></td>
-			</tr>
-		</table>
-	</form>
+	.mr-10 {
+		margin: 10px 0;
+	}
 	
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>	
+	<div id="writeArea">
+		<h2>LEAVE YOUR MESSAGE!</h2>
+		<hr>
+		
+		<form action="guestWrite" method="post">
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
+			  </div>
+			  <input type="text" name="gname" class="form-control" aria-label="Sizing example input" 
+			  		aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">비밀번호</span>
+			  </div>
+			  <input type="text" name="gpassword" class="form-control" aria-label="Sizing example input" 
+			  		aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text">메시지</span>
+			  </div>
+			  <textarea name="gmessage" class="form-control" aria-label="With textarea"></textarea>
+			</div>
+			
+			<input type="submit" value="메시지등록" class="btn btn-light mr-10">
+		</form>		
+	</div>
 </body>
 </html>

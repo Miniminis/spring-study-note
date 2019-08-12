@@ -5,8 +5,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <!-- namespace: 필수속성! - DAO 에서 식별하기 위함! -->
-<mapper namespace="com.gb.mvc.mapper.mybatis.GuestMapper">
-	<insert id="insertMsg" parameterType="com.gb.mvc.model.Message"> <!-- id 필수! -->
+<mapper namespace="com.gb.mvc.dao.MessageSessionDao">
+
+	<insert id="insert" parameterType="com.gb.mvc.model.Message"> <!-- id 필수! -->
 		insert into GUESTBOOK_MESSAGE values (null, #{gname}, #{gpassword}, #{gmessage}) 
 	</insert>
 	
@@ -22,15 +23,15 @@
 		<result property="gmessage" column="gmessage"/>
 	</resultMap>
 	
-	<select id="selectAllList" parameterType="map"  resultMap="listResultMap">
+	<select id="selectList" parameterType="map" resultMap="listResultMap">
 		select * from guestbook_message order by message_id desc limit #{startRow}, #{endRow}
 	</select>
 	
-	<select id="selectOne" parameterType="int"  resultType="com.gb.mvc.model.Message">
+	<select id="select" parameterType="int"  resultType="com.gb.mvc.model.Message">
 		select * from guestbook_message where message_id= #{message_id}
 	</select>
 	
-	<delete id="deleteMsg" parameterType="int">
+	<delete id="deleteMessage" parameterType="int">
 		delete from guestbook_message where message_id= #{message_id}
 	</delete>
 	

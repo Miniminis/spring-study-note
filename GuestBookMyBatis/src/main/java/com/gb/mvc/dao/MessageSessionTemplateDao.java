@@ -35,7 +35,6 @@ public class MessageSessionTemplateDao {
 	public Message select(int mid) {
 
 		String str = namespace+".selectOne";
-			System.out.println("DAO select() : "+sqlSessionTemplate.selectOne(str, mid));
 		return sqlSessionTemplate.selectOne(str, mid);
 		
 	}
@@ -45,7 +44,6 @@ public class MessageSessionTemplateDao {
 	public int selectCnt() {
 		
 		String str = namespace+".selectCnt";
-			System.out.println("DAO selectCount: "+sqlSessionTemplate.selectOne(str));
 		return sqlSessionTemplate.selectOne(str);
 		
 	}
@@ -55,7 +53,6 @@ public class MessageSessionTemplateDao {
 	public List<Message> selectList(Map<String, Object> map) {
 		
 		String str = namespace+".selectAllList";
-			System.out.println("DAO list: "+sqlSessionTemplate.selectList(str, map));
 		return sqlSessionTemplate.selectList(str, map);
 		 
 	}
@@ -67,7 +64,6 @@ public class MessageSessionTemplateDao {
 	public int deleteMessage(int mId) {
 		
 		String str = namespace+".deleteMsg";
-			System.out.println("DAO delete : "+sqlSessionTemplate.update(str, mId));
 		return sqlSessionTemplate.update(str, mId);		
 	}
 

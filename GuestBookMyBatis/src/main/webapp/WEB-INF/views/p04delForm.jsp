@@ -13,19 +13,37 @@
 		margin: 200px;
 		text-align: center;
 	}
+	
+	#writeArea {
+		margin: 100px 300px;
+		text-align: center;
+	}
+	
+	.mr-10 {
+		margin: 10px 0;
+	}
 
 </style>
 </head>
 <body>
-	<h2>방명록 삭제</h2>
+	<div id="writeArea">
+	<h2>DELETE MESSAGE</h2>
 	<hr>
-	<h4>messageId 넘어오니? : ${messageId}</h4>
+	<h4>messageId 넘어오니? : ${messageId}</h4>	
 	
 	<form action="guestDel" method="post">
-		<h3>${messageId}번 게시물을 삭제하려면 비밀번호를 입력해주세요.</h3>  <!-- param. ~ 을 통해서 서비스에서 보낸 파라미터를 받을 수 있다.   -->
 		<input type="hidden" name="messageId" value='${messageId}'>
-		<input type="password" name="passwordConfirm" required><br>
-		<input type="submit" value="삭제하기">
-	</form>	
+		
+		<div class="input-group mb-3">
+		  <div class="input-group-prepend">
+		    <span class="input-group-text" id="inputGroup-sizing-default">비밀번호</span>
+		  </div>
+		  <input type="password" name="passwordConfirm" class="form-control" aria-label="Sizing example input" 
+		  		aria-describedby="inputGroup-sizing-default" required>
+		</div>		
+		<input type="submit" value="삭제하기" class="btn btn-light mr-10">
+	</form>
+	
+	</div>
 </body>
 </html>

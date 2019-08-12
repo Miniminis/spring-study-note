@@ -14,15 +14,6 @@
 		margin: 200px;
 		text-align: center;
 	}
-	table {
-		margin: 0 auto;
-	}
-	
-	div {
-		margin: 5px auto;
-		width: 700px;
-		border: 2px solid #333;
-	}
 	
 </style>
 </head>
@@ -38,28 +29,25 @@
 	
 	<hr>
 	
-	<a href="<c:url value="/guestWriteForm"/>">새로운 글 등록하기</a>
+	<a href="<c:url value="/guestWriteForm"/>" class="btn btn-light">새로운 글 등록하기</a>
 	
 	<hr>
-	<c:forEach items="${list.messageList}" var="message">
-		<div>
-			<table>
-				<tr>
-					<td>메시지번호 : ${message.message_id}</td>
-					<td>손님이름 : ${message.gname }</td>
-					<td>메시지 : ${message.gmessage }</td>
-					<td>비밀번호: ${message.gpassword }</td>
-					<td><a href="guestDelForm?messageId=${message.message_id}">삭제하기</a></td>
-				</tr>
-			</table>
-		</div>
-	</c:forEach>
+	<div class="row">
+		<c:forEach items="${list.messageList}" var="message">
+			<div class="col-sm-4">
+				<div class="card">
+					<h5 class="card-title">${message.message_id}번 메시지</h5>
+					<h6 class="card-subtitle mb-2 text-muted">작성자 ${message.gname }/ 비번 ${message.gmessage }</h6>
+					<p class="card-text">${message.gmessage }</p>
+					<a href="guestDelForm?messageId=${message.message_id}" class="btn btn-light">삭제하기</a>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
 	
 	<c:forEach begin="1" end="${list.pageTotalCnt}" step="1" var="i">
 		<a href="gbmain?page=${i}">[${i}]</a>
 	</c:forEach>
-
-	<hr>
 	
 </body>
 </html>
