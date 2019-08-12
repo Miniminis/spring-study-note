@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <style>
 
 	html, body {
@@ -22,7 +23,7 @@
 	
 	#writeArea {
 		width: 100%;
-		padding: 0px 300px;
+		padding: 0px 200px;
 	}
 	
 	.paging {
@@ -70,6 +71,27 @@
 	
 	<p id="paging"><!-- ajax 통해서 paging 처리 --></p>	
 	
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Modal Header</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Some text in the modal.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	
+	  </div>
+	  
+	</div>
 <script>
 	/* 프로그램 시작과 동시에 pageview() 실행  */
 	$(document).ready(function(){
@@ -107,7 +129,7 @@
 						output += '<h5 class="card-title">'+message_id+'번 메시지</h5>';
 						output += '<h6 class="card-subtitle mb-2 text-muted">작성자 '+gname+'/ 비번'+gpassword+'</h6>';
 						output += '<p class="card-text">'+gmessage+'</p>';
-						output += '<a href="guestDelForm?messageId='+message_id+'" class="btn btn-light">삭제하기</a>';
+						output += '<button onclick="guestDelForm('+message_id+')" class="btn btn-light">삭제하기</button>';
 						output += '</div>';
 						output += '</div>';
 						output += '</div>';
@@ -158,10 +180,13 @@
                 alert("메세지 등록 실패에요 ㅠㅠㅠㅠ왜죠?");
             }
 		});
-		
+		document.getElementById("writeMsgForm").reset();
 	}
 	
 	/* 게시글 삭제 */
+	function guestDelForm(message_id) {
+		$('#myModal').modal(); 
+	}
 
 </script>
 </body>
