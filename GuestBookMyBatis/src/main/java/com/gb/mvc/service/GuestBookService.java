@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gb.mvc.dao.MessageJDBCTemplateDao;
+import com.gb.mvc.dao.MessageSessionTemplateDao;
 import com.gb.mvc.exception.InvalidMessagePasswordException;
 import com.gb.mvc.exception.MessageNotFoundException;
 import com.gb.mvc.model.Message;
@@ -19,15 +20,14 @@ import com.gb.mvc.model.MessageListView;
 public class GuestBookService {
 	
 	@Autowired
-	private MessageJDBCTemplateDao jdbcTemplateDao;
-	
+	private MessageSessionTemplateDao sqlSessionTemplateDao;
 	
 	//글등록
 	public int write(Message message) {
 							
-		int rscnt = jdbcTemplateDao.insert(message); 
+		int rscnt = sqlSessionTemplateDao.insert(message); 
 		
-		System.out.println("===writeService rscnt: "+rscnt);
+			System.out.println("===writeService rscnt: "+rscnt);
 		
 		return rscnt;
 	}
@@ -56,7 +56,7 @@ public class GuestBookService {
 		int curretPageNumber = pageNumber;
 		
 		//전체 게시물의 개수 
-		int messageTotalCnt = jdbcTemplateDao.selectCnt();
+		int messageTotalCnt = sqlSessionTemplateDao.selectCnt();
 						
 		//게시물 내용 리스트, DB 검색에 사용할 startRow, endRow
 		List<Message> messageList = null;
@@ -67,9 +67,14 @@ public class GuestBookService {
 			
 			//파라미터로 넘겨받은 pageNumber 에 따라서 게시판 리스트의 시작로우와 끝 로우가 정해진다.
 			startRow = (pageNumber -1)*MESSAGE_COUNT_PER_PAGE;
-			endRow = startRow + MESSAGE_COUNT_PER_PAGE -1;
+			//endRow = startRow + MESSAGE_COUNT_PER_PAGE -1;
+			endRow = 3;
 			
-			messageList = jdbcTemplateDao.selectList(startRow, endRow);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("startRow", startRow);
+			map.put("endRow", endRow);
+			System.out.println("map"+map);
+			messageList = sqlSessionTemplateDao.selectList(map);
 			
 		} else {
 			curretPageNumber = 0;
@@ -112,6 +117,11 @@ public class GuestBookService {
 			msg = e.getMessage();
 		}
 		
+				System.out.println("==delete SERVICE==");
+				System.out.println("resultCnt"+resultCnt);
+				System.out.println("chk"+chk);
+				System.out.println("msg"+msg);
+				System.out.println("==delete SERVICE END==");
 		
 		map.put("resultCnt", resultCnt);
 		map.put("chk", chk);
@@ -120,12 +130,13 @@ public class GuestBookService {
 		return map;
 	}
 	
-	public int deleteMessage(int mId, String pw) throws SQLException, MessageNotFoundException, InvalidMessagePasswordException {
+	public int deleteMessage(int mId, String pw) throws SQLException, 
+														MessageNotFoundException, 
+														InvalidMessagePasswordException {
 				
 		//1. 전달받은 게시물 아이디 mId로 게시물 확인
 		//- MessageDao 필요 --> 원하는 게시물 선택 select() 
-		Message message = jdbcTemplateDao.select(mId);
-		
+		Message message = sqlSessionTemplateDao.select(mId);
 			
 		//2. 게시물이 존재하지 않으면 예외처리 
 		if(message == null) {
@@ -135,7 +146,7 @@ public class GuestBookService {
 		//3. 게시물이 존재하면 비밀번호 확인 (존재 여부 있다, 없다 ) --> 없으면 예외처리  
 		//4. 비밀번호가 존재하면 --> 비밀번호가 존재하지 않거나 사용자 비밀번호가 틀린 경우에 대해 예외처리
 		if(!message.hasPassword()) {
-			throw new InvalidMessagePasswordException("비밀번호가 일치하지 않습니다.");
+			throw new InvalidMessagePasswordException("비밀번호가 존재하지 않습니다.");
 		}
 		
 		//비밀번호 비교
@@ -144,8 +155,9 @@ public class GuestBookService {
 		}
 			 
 		//5. 비밀번호가 존재하고 일치한다면 --> 정상처리 commit 
-		return jdbcTemplateDao.deleteMessage(mId); 
-		
+			System.out.println("SERVICE delete "+sqlSessionTemplateDao.deleteMessage(mId));
+		return sqlSessionTemplateDao.deleteMessage(mId); 
+
 	}
 	
 }

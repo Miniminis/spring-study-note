@@ -35,36 +35,34 @@
 </head>
 <body>
 	<div id="writeArea">
-	<h2>LEAVE YOUR MESSAGE!</h2>
-	<hr>
-	
-	<form id="writeMsgForm" name="writeMsgForm" method="post">
-		<div class="input-group mb-3">
-		  <div class="input-group-prepend">
-		    <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
-		  </div>
-		  <input type="text" name="gname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-		</div>
-		<div class="input-group mb-3">
-		  <div class="input-group-prepend">
-		    <span class="input-group-text" id="inputGroup-sizing-default">비밀번호</span>
-		  </div>
-		  <input type="text" name="gpassword" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-		</div>
-		<div class="input-group">
-		  <div class="input-group-prepend">
-		    <span class="input-group-text">메시지</span>
-		  </div>
-		  <textarea name="gmessage" class="form-control" aria-label="With textarea"></textarea>
-		</div>
+		<h2>LEAVE YOUR MESSAGE!</h2>
+		<hr>
+		
+		<form id="writeMsgForm" name="writeMsgForm" method="post">
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
+			  </div>
+			  <input type="text" name="gname" class="form-control" aria-label="Sizing example input" 
+			  		aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="inputGroup-sizing-default">비밀번호</span>
+			  </div>
+			  <input type="text" name="gpassword" class="form-control" aria-label="Sizing example input" 
+			  		aria-describedby="inputGroup-sizing-default">
+			</div>
+			<div class="input-group">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text">메시지</span>
+			  </div>
+			  <textarea name="gmessage" class="form-control" aria-label="With textarea"></textarea>
+			</div>
+		</form>
 		<button onclick="submitMsgForm()" class="btn btn-light mr-10">메시지등록</button>
-	</form>
-	
-	<hr>
-	
-	<button type="submit" class="btn btn-light"><a href="<c:url value='/'/>">WRITE A NEW MESSAGE</a></button>
-	
-	<hr>
+		
+		<hr>
 	</div>
 	
 	<div id="list" class="row"><!-- ajax 통해서 DB에 저장된 메시지 리스트 출력 --></div>
@@ -132,8 +130,9 @@
 	/* 게시글 등록 */
 	function submitMsgForm() {
 		var msgFormData = JSON.stringify($('#writeMsgForm').serialize());
+		var msgFormData2 = $('#writeMsgForm').serialize();
 		alert(msgFormData);
-		
+		//alert($('#writeMsgForm').serialize());
 		$.ajax({
 			url: 'guestWrite/JSON',
 			type: 'post',

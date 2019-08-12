@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<!-- namespace: 필수속성! - DAO 에서 식별하기 위함! -->
+<mapper namespace="com.gb.mvc.mapper.mybatis.GuestMapper">
+	<insert id="insertMsg" parameterType="com.gb.mvc.model.Message"> <!-- id 필수! -->
+		insert into GUESTBOOK_MESSAGE values (null, #{gname}, #{gpassword}, #{gmessage}) 
+	</insert>
+	
+	<select id="selectCnt" resultType="int">
+		select count(*) from guestbook_message
+	</select>
+	
+	<!-- DTO와 Mysql 테이블 컬럼 이름이 다른 경우 resultMap을 통해서 컬럼명과 프로퍼티를 설정할 수 있다.  -->
+	<resultMap type="com.gb.mvc.model.Message" id="listResultMap">
+		<id property="message_id" column="message_id"/>
+		<result property="gname" column="gname"/>
+		<result property="gpassword" column="gpassword"/>
+		<result property="gmessage" column="gmessage"/>
+	</resultMap>
+	
+	<select id="selectAllList" parameterType="map"  resultMap="listResultMap">
+		select * from guestbook_message order by message_id desc limit #{startRow}, #{endRow}
+	</select>
+	
+	<select id="selectOne" parameterType="int"  resultType="com.gb.mvc.model.Message">
+		select * from guestbook_message where message_id= #{message_id}
+	</select>
+	
+	<delete id="deleteMsg" parameterType="int">
+		delete from guestbook_message where message_id= #{message_id}
+	</delete>
+	
+</mapper>
+<!-- xml 작성 
+- id: 필수 항목. 구문 구분자 
+- Parameter : Map or JavaBeans 타입 
+- resultType="com.gb.mvc.model.Message" : 하나의 행을 resultType형태로 변환하여 반환 
+
+Oracle : 
+- <![CDATA[<<<<>>>>>]]> : []안에 들어가는 꺽쇠 <, >를 태그로 인식하지 않고 쿼리문 그 자체로 인지한다. 
+-->

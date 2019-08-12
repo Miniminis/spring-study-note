@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- Mysql Datasource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"> 
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
+        <property name="url" value="jdbc:mysql://localhost:3306/project?characterEncoding=utf8"/> 
+        <property name="username" value="bit"/> 
+        <property name="password" value="bit"/>
+    </bean>	
+    
+    <bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate"
+		p:dataSource-ref="dataSource" />
+		
+	<bean id="jdbcTemplateDao"
+		class="com.gb.mvc.dao.MessageJDBCTemplateDao" />
+	
+	<!-- mybatis  -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:com/gb/mvc/mapper/mybatis/*.xml"/>
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"/> <!-- index="0" : 0번째 생성자를 의미   -->
+	</bean>
+	
+	<!-- PlatformTransactionManager 빈 설정 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource">
+		<!-- <property name="dataSource" ref="dataSource" /> -->
+	</bean>
+	
+	<!-- @Transactional 애노테이션 활성화 설정 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gb.mvc.model.Message;
-import com.gb.mvc.model.Message2;
+import com.gb.mvc.model.MessageJSONForm;
 import com.gb.mvc.model.MessageListView;
 import com.gb.mvc.service.GuestBookService;
 
@@ -121,8 +121,8 @@ public class GuestBookController {
 	
 	//글등록
 	@RequestMapping(value="/guestWrite/JSON", method = RequestMethod.POST)
-	public @ResponseBody int writeMessageJSON(@RequestBody Message2 message) {
-		System.out.println("@RequestBody"+message);
+	public @ResponseBody int writeMessageJSON(@RequestBody MessageJSONForm message) {
+		System.out.println("@RequestBody"+message.toString());
 		//System.out.println("==JSON SERVICE WRITE=="+message.getGname()+"===");
 		
 		//int rscnt = gbservice.write(message);

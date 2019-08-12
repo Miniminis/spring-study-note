@@ -1,19 +1,17 @@
 package com.gb.mvc.model;
 
 //DB 와 연결 - 테이블에서 가져온 데이터들을 저장하는 클래스 
-public class Message {
+public class Message2 {
 	
-	private int message_id;
 	private String gname;
 	private String gpassword;
 	private String gmessage;
 	
 	//default 생성자 
-	public Message() {}	
+	public Message2() {}	
 
-	public Message(int message_id, String gname, String gpassword, String gmessage) {
+	public Message2(String gname, String gpassword, String gmessage) {
 		super();
-		this.message_id = message_id;
 		this.gname = gname;
 		this.gpassword = gpassword;
 		this.gmessage = gmessage;
@@ -21,13 +19,6 @@ public class Message {
 
 
 	//getters & setters 
-	public int getMessage_id() {
-		return message_id;
-	}
-
-	public void setMessage_id(int message_id) {
-		this.message_id = message_id;
-	}
 
 	public String getGname() {
 		return gname;
@@ -70,7 +61,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [message_id=" + message_id + ", gname=" + gname + ", gpassword=" + gpassword + ", gmessage="
+		return "Message [gname=" + gname + ", gpassword=" + gpassword + ", gmessage="
 				+ gmessage + "]";
 	}
 
