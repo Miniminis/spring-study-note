@@ -72,25 +72,27 @@
 	<p id="paging"><!-- ajax 통해서 paging 처리 --></p>	
 	
 	<!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog">
+	<div id="delModal" class="modal fade" role="dialog" id="deleteFormModal">
 	  <div class="modal-dialog">
-	
+	  
 	    <!-- Modal content-->
 	    <div class="modal-content">
 	      <div class="modal-header">
+	      
+	      	<h4 class="modal-title">DELETE MESSAGE</h4>
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Modal Header</h4>
 	      </div>
+	      
 	      <div class="modal-body">
-	        <p>Some text in the modal.</p>
+	        <p>삭제폼 구현해야함!!!!!!!!!!!!</p>
 	      </div>
+	      
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
-	
+	    
 	  </div>
-	  
 	</div>
 <script>
 	/* 프로그램 시작과 동시에 pageview() 실행  */
@@ -129,7 +131,7 @@
 						output += '<h5 class="card-title">'+message_id+'번 메시지</h5>';
 						output += '<h6 class="card-subtitle mb-2 text-muted">작성자 '+gname+'/ 비번'+gpassword+'</h6>';
 						output += '<p class="card-text">'+gmessage+'</p>';
-						output += '<button onclick="guestDelForm('+message_id+')" class="btn btn-light">삭제하기</button>';
+						output += '<button data-toggle="modal" data-id="'+message_id+'" data-target="#delModal" class="btn btn-light">삭제하기</button>';
 						output += '</div>';
 						output += '</div>';
 						output += '</div>';
@@ -184,9 +186,10 @@
 	}
 	
 	/* 게시글 삭제 */
-	function guestDelForm(message_id) {
-		$('#myModal').modal(); 
-	}
+	$('#delModal').on('show.bs.modal', function(e){
+		var mid = $(this).data('id');
+		
+	})
 
 </script>
 </body>
