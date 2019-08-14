@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.gb.mvc">
-		<level value="info" />
+		<level value="all" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->

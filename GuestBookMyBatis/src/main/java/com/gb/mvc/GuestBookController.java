@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -107,17 +110,43 @@ public class GuestBookController {
 	///////////////////////////////////////////////////////////////////////////////////////////
 
 	
-	//메인페이지 && 글리스트 출력 - JSON 형식 
-	@RequestMapping("/gbmain/JSON") 
-	@ResponseBody
-	public MessageListView getMain(@RequestParam(
-									value = "page", 
-									defaultValue = "1") int page) {
+	//메인페이지 && 글리스트 출력
+	//반환 타입 : JSON 
+	@RequestMapping("/gbmain/JSON") 	
+	public @ResponseBody MessageListView getMainJSON01(@RequestParam(
+													value = "page", 
+													defaultValue = "1") int page,
+												Model model,
+												HttpServletResponse rep) {
 		
 		MessageListView view = gbservice.getList(page);
-		//System.out.println("===JSON view"+view);			
+		//System.out.println("===JSON view"+view);		
+		
+		/* 상태코드 */
+		//rep.setStatus(HttpServletResponse.SC_OK); //200
+		//rep.setStatus(HttpServletResponse.SC_NOT_FOUND); //404 
+		//rep.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); //500
 		return view;
 	}
+	
+	//반환 타입이 ResponseEntity<T> : Spring 4.2 버전 이상일때 사용 가능 
+	//반환하는 Body, statusCode, HttpHeader 
+	//메인페이지 && 글리스트 출력 - JSON 형식 
+	@RequestMapping("/gbmain/JSON02")
+	@ResponseBody
+	public ResponseEntity<MessageListView> getMainJSON02(
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			Model model
+			) {
+		
+		MessageListView view = gbservice.getList(page);
+		
+		ResponseEntity<MessageListView> entity = 
+				new ResponseEntity<MessageListView>(view, HttpStatus.OK);
+		
+		return entity ;
+	}
+		
 	
 	//글등록
 	@RequestMapping(value="/guestWrite/JSON", method = RequestMethod.POST)
