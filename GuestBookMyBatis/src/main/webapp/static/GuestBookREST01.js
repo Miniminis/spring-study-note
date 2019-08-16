@@ -1,6 +1,6 @@
 /* 프로그램 시작과 동시에 pageview() 실행  */
 $(document).ready(function(){
-	pageview(1);
+	pageview(1); //최초 리스트 출력 : 내림차순으로 3개만 출력 
 	
 	/* 게시글 삭제 */
 	$('#delModal').on('show.bs.modal', function(e){
@@ -21,7 +21,9 @@ $(document).ready(function(){
 });		
 	
 /* 리스트 출력, 페이지 번호 표시를 위한 ajax 처리 */
-function pageview(num) {		
+function pageview(num) {
+	//alert("1  "+num);	//최초 리스트 출력을 위한 num 매개변수 1 확인
+	$('#moreListBtn').remove();
 	$.ajax ({
 			url: 'http://localhost:8080/gbmb/api/guest',
 			type: 'get',
@@ -40,7 +42,7 @@ function pageview(num) {
 					var gpassword = list[i].gpassword;
 					var gmessage = list[i].gmessage;
 					
-					output += '<div class="col-sm-4">';
+					output += '<div class="col-sm-4 mr-10">';
 					output += '<div class="card">';
 					output += '<div class="card-body">';
 					output += '<h5 class="card-title">'+message_id+'번 메시지</h5>';
@@ -52,17 +54,22 @@ function pageview(num) {
 					output += '</div>';
 					
 				};
+				$('#list').append(output);
 				
-				//페이징 처리 
+				//더보기 버튼을 통한 페이징 처리 
 				var paging='';
-					
-				for(var j=1; j<data.pageTotalCnt+1; j++) {
-					paging +='<span class="paging"><a onclick="pageview('+j+')">['+j+']</a></span>'; 
-				};
 				
-				//alert(output);
-				$('#list').html(output);
-				$('#paging').html(paging);
+				num = num+1; //다음 페이지 출력을 위해 버튼을 누르면 다음 페이징 값이 전달되어 매소드 실행이 되어야 함
+				if(num<=data.pageTotalCnt) {
+					paging += '<button id="moreListBtn" onclick="pageview('+num+')" class="btn btn-light">더 많은 방명록 보기</button>';
+					$('#paging').append(paging);
+				} else {
+					$('#paging').remove();
+				}
+
+				//alert("2  "+num);	
+				//num = num+1;
+				//alert("3  "+num);	
 			}
 	});
 } 
