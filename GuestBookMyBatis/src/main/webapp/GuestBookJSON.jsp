@@ -73,7 +73,7 @@
 	<p id="paging"><!-- ajax 통해서 paging 처리 --></p>	
 	
 	<!-- Modal -->
-	<div id="delModal" class="modal fade" role="dialog" id="deleteFormModal">
+	<div id="delModal" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
 	  
 	    <!-- Modal content-->
@@ -85,11 +85,18 @@
 	      </div>
 	      
 	      <div class="modal-body">
-	        <p>삭제폼 구현해야함!!!!!!!!!!!!</p>
+	        <form method="post">
+	          <div class="form-group">
+	            <label for="delPwChk" class="col-form-label">비밀번호 확인 : </label>
+	            <input type="password" class="form-control" id="delPwChk">
+	          	<input type="hidden" id="msgNum">
+	          </div>
+	        </form>
 	      </div>
 	      
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+	        <button type="button" onclick="submitDelMsg()" class="btn btn-primary">Send message</button>
 	      </div>
 	    </div>
 	    

@@ -160,25 +160,18 @@ public class GuestBookController {
 		
 		return rscnt;
 	}
-	
-	//글 삭제폼
-	/*@RequestMapping("/guestDelForm/JSON")
-	public String delMessageForm(
-			@RequestParam("messageId") int mid,
-			Model model) {
-		
-		model.addAttribute("messageId", mid);
-		
-		return "p04delForm";
-	}
-	
+
 	//글삭제
 	@RequestMapping(value = "/guestDel/JSON", method = RequestMethod.POST)
-	public String delMessage(
+	@ResponseBody
+	public int delMessageJSON(
 			@RequestParam("messageId") int mid, 
 			@RequestParam("passwordConfirm") String pw,
 			Model model
 			) {
+		
+		System.out.println("1  "+mid);
+		System.out.println("2  "+pw);
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
@@ -189,7 +182,7 @@ public class GuestBookController {
 		System.out.println("======deleteController msg===="+resultMap.get("msg"));
 		System.out.println("======deleteController resultCnt===="+resultMap.get("resultCnt"));
 				
-		return "p05delResult";
-	}*/
+		return (int) resultMap.get("resultCnt");
+	}
 	
 }
