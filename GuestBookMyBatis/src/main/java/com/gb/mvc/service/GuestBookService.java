@@ -33,12 +33,9 @@ public class GuestBookService {
 	public int write(Message message) {
 		
 		msgSessionDao = sqlTemplate.getMapper(MessageSessionDao.class);
-							
-		int rscnt = msgSessionDao.insert(message); 
 		
-		System.out.println("===writeService rscnt: "+rscnt);
-		
-		return rscnt;
+		System.out.println("2  "+message);
+		return msgSessionDao.insert(message); 				
 	}
 	
 	
@@ -47,9 +44,10 @@ public class GuestBookService {
 		
 		//MessageListView 변수선언 
 		MessageListView view = null; 
-		
+		System.out.println("2  "+page);
 		view = getMessageListView(view, page);
 		
+		System.out.println("5   "+view);
 		return view;
 		
 	}
@@ -59,7 +57,8 @@ public class GuestBookService {
 	private static final int MESSAGE_COUNT_PER_PAGE = 3;
 	
 	//MessageListView을 출력하는 매서드 
-	public MessageListView getMessageListView(MessageListView view, int pageNumber) {
+	public MessageListView getMessageListView(MessageListView view, 
+												int pageNumber) {
 		
 		//dao생성
 		msgSessionDao = sqlTemplate.getMapper(MessageSessionDao.class);
@@ -73,7 +72,7 @@ public class GuestBookService {
 		//게시물 내용 리스트, DB 검색에 사용할 startRow, endRow
 		List<Message> messageList = null;
 		int startRow = 0;
-		int endRow=0;
+		int endRow= 0;
 			
 		if(messageTotalCnt >0) {
 			
@@ -85,7 +84,9 @@ public class GuestBookService {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("startRow", startRow);
 			map.put("endRow", endRow);
-				System.out.println("map"+map);
+			
+			System.out.println("3  "+map);
+			
 			messageList = msgSessionDao.selectList(map);
 			
 		} else {
@@ -102,6 +103,8 @@ public class GuestBookService {
 				endRow
 				); 
 		
+		System.out.println("4   "+view);
+		
 		return view;
 	}
 	
@@ -115,9 +118,11 @@ public class GuestBookService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
+			System.out.println("d2  "+mid+"/"+pw);
 			resultCnt = deleteMessage(mid, pw);
 			chk = true;
-			
+			System.out.println("d3  "+resultCnt);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			msg = e.getMessage();
@@ -129,16 +134,11 @@ public class GuestBookService {
 			msg = e.getMessage();
 		}
 		
-		System.out.println("==delete SERVICE==");
-		System.out.println("resultCnt"+resultCnt);
-		System.out.println("chk"+chk);
-		System.out.println("msg"+msg);
-		System.out.println("==delete SERVICE END==");
-		
 		map.put("resultCnt", resultCnt);
 		map.put("chk", chk);
 		map.put("msg", msg);
-		
+
+		System.out.println("d4  "+map);
 		return map;
 	}
 	
@@ -151,7 +151,8 @@ public class GuestBookService {
 		//1. 전달받은 게시물 아이디 mId로 게시물 확인
 		//- MessageDao 필요 --> 원하는 게시물 선택 select() 
 		Message message = msgSessionDao.select(mId);
-			
+		System.out.println("d2-1  "+message);
+		
 		//2. 게시물이 존재하지 않으면 예외처리 
 		if(message == null) {
 			throw new MessageNotFoundException(mId+"번 메시지가 존재하지 않습니다.");

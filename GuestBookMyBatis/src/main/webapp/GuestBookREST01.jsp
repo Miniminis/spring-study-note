@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="<c:url value="static/GuestBookJSON.js" />" text="text/javascript"></script>
+<script src="<c:url value="static/GuestBookREST01.js" />" text="text/javascript"></script>
 <style>
 
 	html, body {
@@ -47,28 +47,28 @@
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
 			  </div>
-			  <input type="text" name="gname" class="form-control" aria-label="Sizing example input" 
+			  <input type="text" name="gname" id="gname"  class="form-control" aria-label="Sizing example input" 
 			  		aria-describedby="inputGroup-sizing-default">
 			</div>
 			<div class="input-group mb-3">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text" id="inputGroup-sizing-default">비밀번호</span>
 			  </div>
-			  <input type="text" name="gpassword" class="form-control" aria-label="Sizing example input" 
+			  <input type="text" name="gpassword" id="gpassword" class="form-control" aria-label="Sizing example input" 
 			  		aria-describedby="inputGroup-sizing-default">
 			</div>
 			<div class="input-group">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text">메시지</span>
 			  </div>
-			  <textarea name="gmessage" class="form-control" aria-label="With textarea"></textarea>
+			  <textarea name="gmessage" id="gmessage" class="form-control" aria-label="With textarea"></textarea>
 			</div>			
 		</form>
 		<button onclick="submitMsgForm()" class="btn btn-light mr-10">메시지등록</button>
 		<hr>
 	</div>
 	
-	<div id="list" class="row"><!-- ajax 통해서 DB에 저장된 메시지 리스트 출력 --></div>
+	<div id="list" class="row"><!-- ajax - DB에 저장된 메시지 리스트 출력 --></div>
 	
 	<p id="paging"><!-- ajax 통해서 paging 처리 --></p>	
 	
@@ -85,7 +85,7 @@
 	      </div>
 	      
 	      <div class="modal-body">
-	        <form method="post">
+	        <form>
 	          <div class="form-group">
 	            <label for="delPwChk" class="col-form-label">비밀번호 확인 : </label>
 	            <input type="password" class="form-control" id="delPwChk">
