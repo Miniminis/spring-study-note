@@ -73,7 +73,7 @@
 	<p id="paging"><!-- ajax 통해서 paging 처리 --></p>	
 	
 	<!-- Modal -->
-	<div id="delModal" class="modal fade" role="dialog">
+	<div id="delModal" class="modal fade" tabindex='-1' role="dialog">
 	  <div class="modal-dialog">
 	  
 	    <!-- Modal content-->
@@ -88,7 +88,7 @@
 	        <form>
 	          <div class="form-group">
 	            <label for="delPwChk" class="col-form-label">비밀번호 확인 : </label>
-	            <input type="password" class="form-control" id="delPwChk">
+	            <input type="password" class="form-control" id="delPwChk" autofocus>
 	          	<input type="hidden" id="msgNum">
 	          </div>
 	        </form>

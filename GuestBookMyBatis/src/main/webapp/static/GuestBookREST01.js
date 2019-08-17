@@ -11,6 +11,8 @@ $(document).ready(function(){
 
 		modal.find('.modal-title').text(mid+'번 메시지 삭제');
 		modal.find('#msgNum').val(mid);
+		modal.find('#delPwChk').focus(); //not working ㅠㅠㅠ 
+		
 
 	});
 
@@ -48,7 +50,7 @@ function pageview(num) {
 					output += '<h5 class="card-title">'+message_id+'번 메시지</h5>';
 					output += '<h6 class="card-subtitle mb-2 text-muted">작성자 '+gname+'/ 비번'+gpassword+'</h6>';
 					output += '<p class="card-text">'+gmessage+'</p>';
-					output += '<button data-toggle="modal" data-target="#delModal" data-id="'+message_id+'" class="btn btn-light">삭제하기</button>';
+					output += '<button data-toggle="modal" data-target="#delModal" data-id="'+message_id+'" data-keyboard="true" class="btn btn-light">삭제하기</button>';
 					output += '</div>';
 					output += '</div>';
 					output += '</div>';
@@ -95,7 +97,9 @@ function submitMsgForm() {
 			} else {
 				alert('우쨰쓰까...'+data+'개의 메시지 등록 실패랑께ㅠㅠㅠ');
 			}
+			$('#list').empty(); //새로 등록된 메시지 결과 출력을 위해 기존 리스트 비워주기
 			pageview(1); //바뀐 데이터 결과 적용된 리스트 재출력 (redirect 의 기능)
+            //window.location = "http://localhost:8080/gbmb/api/guest"; //페이지 번호 파라미터를 받을 수 없음 
 		}, 
 		error: function(){
             alert("메세지 등록 실패에요 ㅠㅠㅠㅠ왜죠????");
@@ -128,7 +132,8 @@ function submitDelMsg() {
 			} else {
 				alert('삭제 안됐는데 ㅠㅠㅠ 힘내여');
 			}
-			pageview(1);
+			$('#list').empty(); //새로 등록된 메시지 결과 출력을 위해 기존 리스트 비워주기
+			pageview(1); //바뀐 데이터 결과 적용된 리스트 재출력 (redirect 의 기능)            
 			$('#delModal').modal('hide');
 		}
 	}) 
