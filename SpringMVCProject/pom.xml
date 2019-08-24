@@ -208,6 +208,7 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <!-- pom.xml 상단에 xsi:schemaLocation 부분 에러 처리를 위한 plugin 추가  -->
             <plugin>
 	            <groupId>org.codehaus.mojo</groupId>
 	            <artifactId>exec-maven-plugin</artifactId>
