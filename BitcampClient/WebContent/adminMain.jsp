@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 	.table th {
-		width : 50px;
+		width : 150px;
 	}
 </style>
 </head>
@@ -33,8 +33,8 @@
 	</div>
 	
 	<!-- 호텔 상세 페이지 MODAL -->
-	<div id="hotelDetail" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog">
-	  <div class="modal-dialog modal-lg" role="document">
+	<div id="hotelDetail" class="modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title">Modal title</h5>
@@ -71,6 +71,69 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- 호텔 방 등록 -->
+	<div id="roomAddModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">새로운 방 등록</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form id="roomAddForm">
+	      	  <input type="text" id="hotelnum" name="hotelnum" value="" >
+	      	  <input type="text" id="hotelname" name="hotelname" value="" >
+	          <div class="form-group">
+	            <label for="roomname" class="col-form-label">방 이름</label>
+	            <input type="text" class="form-control" id="roomname" name="roomname">
+	          </div>
+	          <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text" id="inputGroupFileAddon01">방 이미지</span>
+				  </div>
+				  <div class="custom-file">
+				    <input type="file" class="custom-file-input" id="roomimg" name="roomimg" aria-describedby="inputGroupFileAddon01">
+				    <label class="custom-file-label" for="roomimg">탐색</label>
+				  </div>
+			  </div>
+			  <div class="form-group">
+	            <label for="maxppl" class="col-form-label">최대 수용 인원</label>
+	            <select class="custom-select" id="maxppl" name="maxppl">
+				    <option selected>선택</option>
+				    <option value="2">2명</option>
+				    <option value="4">4명</option>
+				    <option value="8">8명</option>
+				    <option value="20">20명</option>
+				  </select>
+	          </div>
+	          <div class="form-group">
+	            <label for="price" class="col-form-label">방 가격</label>
+	            <input type="number" class="form-control" id="price" name="price">
+	          </div>
+	          <div class="form-group">
+	            <label for="convenience" class="col-form-label">편의시설</label>
+	            <select class="custom-select" id="convenience" name="convenience">
+				    <option selected>선택</option>
+				    <option value="Y">있음</option>
+				    <option value="N">없음</option>
+				  </select>
+	          </div>
+	          <div class="form-group">
+	            <label for="intro" class="col-form-label">방 소개 </label>
+	            <textarea class="form-control" id="intro"></textarea>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button"  onclick="submitAddForm()" class="btn btn-primary">Send message</button>
 	      </div>
 	    </div>
 	  </div>

@@ -12,7 +12,8 @@ desc user;
 select * from user;
 
 CREATE TABLE room (
-	roomnum     int(7)     NOT NULL, -- idx
+	roomnum     int(7)     NOT NULL auto_increment, -- idx
+    hotelnum	int(10)		NOT NULL,
 	hotelname   VARCHAR(100)  NOT NULL, -- hotelname
 	roomname    VARCHAR(50)  NOT NULL, -- roomname
 	roomimg     VARCHAR(255) default '/image/noImg.png', -- roomimg
@@ -26,7 +27,7 @@ drop table room;
 desc room;
 select * from room;
 
-insert into room values(1,	'hotel1', '별빛룸', null, '4', '어서오세여', 5000, 'Y');
+insert into room values(null, 1	,'hotel01', '별빛룸', null, '4', '어서오세여', 5000, 'Y');
 
 
 

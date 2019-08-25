@@ -138,13 +138,6 @@
 			<version>${org.springframework-version}</version> 
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<!-- <dependency>
-		    <groupId>com.google.code.gson</groupId>
-		    <artifactId>gson</artifactId>
-		    <version>2.8.5</version>
-		</dependency> -->
-		
 		<!-- 공공 API 이용을 위해 추가  -->
 		<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-core -->
 		<dependency>
@@ -159,6 +152,59 @@
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1.1</version>
+		</dependency>
+		
+		<!-- 파일 업로드를 위한 플러그인 3개  pool2, io, fileupload-->		        
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-pool2</artifactId>
+		    <version>2.5.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.5</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.3</version>
+		</dependency>
+		
+		<!-- mysql 연결을 위한 플러그인 두개 : mysql + dbcp2-->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>8.0.16</version>
+		</dependency>
+		
+		<!-- Apache commons dbcp -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-dbcp2</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+		
+		<!-- mybatis 프레임워크 사용을 위한 라이브러리 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis --> 
+		<dependency> 
+			<groupId>org.mybatis</groupId> 
+			<artifactId>mybatis</artifactId> 
+			<version>3.4.1</version> 
+		</dependency> 
+		
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring --> 
+		<dependency> 
+			<groupId>org.mybatis</groupId> 
+			<artifactId>mybatis-spring</artifactId> 
+			<version>1.3.0</version> 
 		</dependency>
 				        
 	</dependencies>
@@ -198,15 +244,7 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-            <!-- pom.xml 상단에 xsi:schemaLocation 부분 에러 처리를 위한 plugin 추가  -->
-            <plugin>
-	            <groupId>org.codehaus.mojo</groupId>
-	            <artifactId>exec-maven-plugin</artifactId>
-	            <version>1.2.1</version>
-	            <configuration>
-	               <mainClass>org.test.int1.Main</mainClass>
-	            </configuration>
-	         </plugin>
+            
         </plugins>
     </build>
 </project>

@@ -1,25 +1,23 @@
 package com.bitcamp.ad.domain;
 
+import org.springframework.web.multipart.MultipartFile;
 
-public class Room {
+public class AddRoomForm {
 	
-	private int roomnum; //auto_increment
 	private int hotelnum; //파라미터 01
 	private String hotelname; //파라미터 02
-	private String roomname; //toRoom() 
-	private String roomimg; //AddService 단 
-	private int maxppl; //toRoom()
-	private String intro; //toRoom()
-	private int price; //toRoom()
-	private char convenience; //toRoom()
-
+	private String roomname;
+	private MultipartFile roomimg;
+	private int maxppl;
+	private String intro;
+	private int price;
+	private char convenience;
 	
-	public Room () {}
+	public AddRoomForm() {}
 
-	public Room(int roomnum, int hotelnum, String hotelname, String roomname, String roomimg, int maxppl, String intro,
+	public AddRoomForm(int hotelnum, String hotelname, String roomname, MultipartFile roomimg, int maxppl, String intro,
 			int price, char convenience) {
 		super();
-		this.roomnum = roomnum;
 		this.hotelnum = hotelnum;
 		this.hotelname = hotelname;
 		this.roomname = roomname;
@@ -30,15 +28,7 @@ public class Room {
 		this.convenience = convenience;
 	}
 
-	public int getRoomnum() {
-		return roomnum;
-	}
-
-
-	public void setRoomnum(int roomnum) {
-		this.roomnum = roomnum;
-	}
-
+	
 
 	public int getHotelnum() {
 		return hotelnum;
@@ -52,66 +42,53 @@ public class Room {
 		return hotelname;
 	}
 
-
 	public void setHotelname(String hotelname) {
 		this.hotelname = hotelname;
 	}
-
 
 	public String getRoomname() {
 		return roomname;
 	}
 
-
 	public void setRoomname(String roomname) {
 		this.roomname = roomname;
 	}
 
-
-	public String getRoomimg() {
+	public MultipartFile getRoomimg() {
 		return roomimg;
 	}
 
-
-	public void setRoomimg(String roomimg) {
+	public void setRoomimg(MultipartFile roomimg) {
 		this.roomimg = roomimg;
 	}
-
 
 	public int getMaxppl() {
 		return maxppl;
 	}
 
-
 	public void setMaxppl(int maxppl) {
 		this.maxppl = maxppl;
 	}
-
 
 	public String getIntro() {
 		return intro;
 	}
 
-
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-
 
 	public int getPrice() {
 		return price;
 	}
 
-
 	public void setPrice(int price) {
 		this.price = price;
 	}
 
-
 	public char getConvenience() {
 		return convenience;
 	}
-
 
 	public void setConvenience(char convenience) {
 		this.convenience = convenience;
@@ -119,9 +96,22 @@ public class Room {
 
 	@Override
 	public String toString() {
-		return "Room [roomnum=" + roomnum + ", hotelnum=" + hotelnum + ", hotelname=" + hotelname + ", roomname="
-				+ roomname + ", roomimg=" + roomimg + ", maxppl=" + maxppl + ", intro=" + intro + ", price=" + price
-				+ ", convenience=" + convenience + "]";
+		return "AddRoomForm [roomname=" + roomname + ", roomimg=" + roomimg + ", maxppl=" + maxppl + ", intro=" + intro
+				+ ", price=" + price + ", convenience=" + convenience + "]";
 	}
-
+	
+	public Room toRoom() {
+		Room room = new Room();
+		
+		room.setHotelnum(hotelnum);
+		room.setHotelname(hotelname);
+		room.setRoomname(roomname);
+		room.setPrice(price);
+		room.setMaxppl(maxppl);
+		room.setIntro(intro);
+		room.setConvenience(convenience);
+		//file 은 service 단에서 추가 
+		
+		return room;
+	}
 }

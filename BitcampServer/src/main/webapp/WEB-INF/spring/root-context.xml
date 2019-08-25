@@ -9,24 +9,24 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- Mysql Datasource -->
-	<!--  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"> 
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"> 
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
         <property name="url" value="jdbc:mysql://localhost:3306/project?characterEncoding=utf8"/> 
         <property name="username" value="bit"/> 
         <property name="password" value="bit"/>
-    </bean>	 -->
+    </bean>
     
     <!-- mybatis  -->
-	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="mapperLocations" value="classpath:com/gb/mvc/mapper/mybatis/*.xml"/>
+		<property name="mapperLocations" value="classpath:com/bitcamp/ad/mapper/mybatis/*.xml"/>
 	</bean>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory"/> index="0" : 0번째 생성자를 의미  
-	</bean> -->
+		<constructor-arg index="0" ref="sqlSessionFactory"/> <!-- index="0" : 0번째 생성자를 의미   -->
+	</bean>
     
-    <!-- PlatformTransactionManager 빈 설정 -->
+    <!-- 트랜잭션 관리를 위한 PlatformTransactionManager 빈 설정 -->
 	<!-- <bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"  
 		p:dataSource-ref="dataSource">
