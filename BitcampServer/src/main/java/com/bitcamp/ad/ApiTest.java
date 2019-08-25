@@ -11,17 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.cxf.helpers.IOUtils;
 import org.json.simple.JSONObject;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ApiTest {
 	
+	//호텔리스트 from Tour API
 	@GetMapping()
 	@CrossOrigin
 	public void test (HttpServletRequest req, 
@@ -34,7 +31,7 @@ public class ApiTest {
 	
 		URL url = new URL(address);
 		
-		System.out.println(address);
+		System.out.println("api 01 "+address);
 		
 		InputStream in = url.openStream();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
