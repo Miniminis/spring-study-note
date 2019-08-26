@@ -25,23 +25,44 @@ $(document).ready(function(){
 			//폼 초기화 : 이후 다시 열어도 폼이 비워져 있도록!
 	});
 	
-	//호텔별 룸 리스트 모달 닫기 
-/*	$('#roomListCloseBtn').click(function(){
-		$('#roomListModal').hide();
+	
+	//수정 폼 열기
+	$('#editFormModal').on('show.bs.modal', function (event) {
+		
+		//alert('수정 모달 왜 안떠');
+		
+		  var button = $(event.relatedTarget); 
+		  
+		  var roomnum = button.data('roomnum');
+		  var roomimage = button.data('image');
+		  var roomname = button.data('roomname');
+		  var maxppl = button.data('maxppl');
+		  var intro = button.data('intro');
+		  var price = button.data('price');
+		  var convenience = button.data('convenience');
+		  
+		  var modal = $(this);
+		  
+		  modal.find('.modal-title').text(roomname+ ' 정보 수정');
+		  
+		  modal.find('#roomNum').val(roomnum);
+		  modal.find('#oldRoomPhoto').val(roomimage);
+		  modal.find('#rName').val(roomname);
+		  modal.find('#rppl').val(maxppl);
+		  modal.find('#rPrice').val(price);
+		  modal.find('#rConvenience').val(convenience);
+		  modal.find('#rIntro').val(intro);
+		  
 	})
 	
-	//호텔 리스트가 닫혔을 때 이벤트 
-	$('#roomListModal').on('hide.bs.modal', function (e) {
-		//$(this).find('.modal-body').empty(); //초기화 : 이후 다시 열어도 폼이 비워져 있도록!
-		var modal = $(this);
-		
-		modal.find('#roomname').text('');
-		modal.find('#price').text('');
-		modal.find('#maxppl').text('');
-		modal.find('#convenience').text('');
-		modal.find('#intro').text('');
-	});	*/
-})
+	//수정 폼 닫기
+	//호텔 방 등록 폼 모달 닫기 
+	$('#editFormModal').on('hide.bs.modal', function (e) {
+		$(this).find('.modal-body form')[0].reset(); 
+			//폼 초기화 : 이후 다시 열어도 폼이 비워져 있도록!
+	})
+	
+});
 
 //호텔리스트
 function hotelList(pageNo) {
@@ -67,20 +88,30 @@ function hotelList(pageNo) {
 			var output ='';
 			
 			for(var i=0; i<itemlist.length; i++) {
+				
+				var firstimage = itemlist[i].firstimage;
+				if(firstimage == 'undefined') {
+					firstimage = '/image/noImg.png';
+				}
+				
+				var title = itemlist[i].title;
+				var addr1 = itemlist[i].addr1;
+				var tel = itemlist[i].tel;
+				var contentid = itemlist[i].contentid;
 					
 				output += '<div class="col-md-4">';
-				output += '<img src="'+itemlist[i].firstimage+'" class="card-img-top" alt="...">';
+				output += '<img src="'+firstimage+'" class="card-img-top" alt="...">';
 				output += '<div class="card-body">';
-				output += '<h5 class="card-title">'+itemlist[i].title+'</h5>';
-				output += '<p class="card-text">'+itemlist[i].addr1+'</p>';
-				output += '<p class="card-text">'+itemlist[i].tel+'</p>';
+				output += '<h5 class="card-title">'+title+'</h5>';
+				output += '<p class="card-text">'+addr1+'</p>';
+				output += '<p class="card-text">'+tel+'</p>';
 				output += '</div>';		
 				output += '<div class="card-footer">';
-				output += '<small class="text-muted">Last updated 3 mins ago';
-				output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+itemlist[i].contentid+'" data-keyboard="true" class="btn btn-light">호텔소개</button>';
-				//output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+itemlist[i].contentid+'" data-keyboard="true" class="btn btn-light">숙박상세정보</button>';
-				output += '<button data-toggle="modal" data-target="#roomListModal" data-id="'+itemlist[i].contentid+'" data-title="'+itemlist[i].title+'" data-keyboard="true" class="btn btn-light">방 목록 보기</button>';
-				output += '<button data-toggle="modal" data-target="#roomAddModal" data-id="'+itemlist[i].contentid+'" data-title="'+itemlist[i].title+'" data-keyboard="true" class="btn btn-light">새로운 방 등록</button>';
+				output += '<small class="text-muted">';
+				output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-light">호텔소개</button>';
+				//output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-light">숙박상세정보</button>';
+				output += '<button data-toggle="modal" data-target="#roomListModal" data-id="'+contentid+'" data-title="'+title+'" data-keyboard="true" class="btn btn-light">방 목록 보기</button>';
+				output += '<button data-toggle="modal" data-target="#roomAddModal" data-id="'+contentid+'" data-title="'+title+'" data-keyboard="true" class="btn btn-light">새로운 방 등록</button>';
 				output += '</small>';
 				output += '</div>';
 				output += '</div>';
@@ -198,6 +229,7 @@ function hotelRoomList() {
 					 for(var i=0; i<data.length; i++) {
 						 //alert(data[i].roomname);
 						 
+						 var roomnum = data[i].roomnum;
 						 var roomname = data[i].roomname;
 						 var roomimg = data[i].roomimg;
 						 var maxppl = data[i].maxppl;
@@ -209,6 +241,7 @@ function hotelRoomList() {
 						output += '<div class="row no-gutters">';
 						output += '<div class="col-md-4">';
 						output += '<img src="..." class="card-img" alt="..." value="">';
+						//output += '<img src="<c:url value =\"/uploadedfile/roomPhoto\"/>" class="card-img" alt="..." value="">';
 						output += '</div>';
 						output += '<div class="col-md-8">';
 						output += '<div class="card-body">';
@@ -221,9 +254,9 @@ function hotelRoomList() {
 						output += '<tr><th scope="row">최대 수용 인원</th><td>'+maxppl+'</td></tr>';
 						output += '<tr><th scope="row">편의시설</th><td>'+convenience+'</td></tr>';
 						output += '<tr><th scope="row">소개</th><td>'+intro+'</td></tr>';
-						output += '<tr><td colspan="2" class=".righty">';
-						output += '<button type="button" class="btn btn-secondary">수정</button>';
-						output += '<button type="button" class="btn btn-secondary">삭제</button>';
+						output += '<tr><td colspan="2" class="righty">';
+						output += '<button id="editBtn" type="button" data-toggle="modal" data-target="#editFormModal" data-roomnum="'+roomnum+'" data-image="'+roomimg+'" data-roomname="'+roomname+'" data-maxppl="'+maxppl +'" data-intro="'+intro+'" data-price="'+price+'" data-convenience="'+convenience+'"  class="btn btn-secondary mr-1">수정</button>';
+						output += '<button id="delBnt" onclick="delRoom('+roomnum+')" type="button" class="btn btn-secondary">삭제</button>';
 						output += '</td></tr>';
 						output += '</tbody>';
 						output += '</table></div></div></div></div>';
@@ -245,8 +278,8 @@ function submitAddForm() {
 	var roomFormData = $('#roomAddForm')[0];
 	var data = new FormData(roomFormData);
 	
-	alert('방 등록 01 '+roomFormData );
-	alert('방 등록 01-1 '+data);
+	//alert('방 등록 01 '+roomFormData );
+	//alert('방 등록 01-1 '+data);
 	
 	$.ajax({
 		url : 'http://localhost:8080/ad/api/hotel/room',
@@ -269,4 +302,56 @@ function submitAddForm() {
 } 
 
 /*방삭제*/
+function delRoom(roomnum) {
+	
+	if(confirm('삭제된 방의 정보는 다시 복구할 수 없습니다. 정말 삭제하시겠습니까? ')) {
+		$.ajax({
+			url : 'http://localhost:8080/ad/api/hotel/room/'+roomnum,
+			type: 'delete',
+			success : function(data) {
+				if(data>0) {
+					alert(data+'개의 방이 정상적으로 삭제되었습니다.');
+				} else {
+					alert('방 삭제에 실패하였습니다 ㅠㅠㅠ 으엉어엉어어어어엉');
+				}
+				$('#roomListModal').modal('hide');
+				hotelList(1);
+			},
+			error : function(e) {
+				alert(e);
+			}
+		})
+	}
+}
+
 /*방수정*/
+function submitEditForm() {
+	
+	//수정을 위해 방번호 url에 추가 
+	var roomnum = $('#roomNum').val();
+	
+	var editFormData = $('#editForm')[0];
+	var data = new FormData(editFormData);
+	
+	alert('방 정보 수정 01 '+editFormData);
+	alert('방 정보 수정 02 '+data);
+	alert('방 정보 수정 03 '+roomnum);
+	
+	$.ajax({
+		url: 'http://localhost:8080/ad/api/hotel/room/'+roomnum,
+		type: 'put',
+		data : data,
+		//data : JSON.stringify(data),
+		enctype: 'multipart/form-data',
+		processData: false,
+		contentType: false,
+		//contentType:'application/json;charset=UTF-8',
+		success : function(data) {
+			alert(data+' 개 방 정보 수정성공!');
+		},
+		error : function(e) {
+			alert(e);
+		}
+	})
+}
+

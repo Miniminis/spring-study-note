@@ -10,4 +10,10 @@ public interface RoomSessionDao {
 
 	public List<Room> selectRoomListByHotel(int hotelnum);
 
+	public int deleteByRoomNum(int roomnum);
+
+	public Room selectByRoomnum(int roomnum);
+
+	public int editRoom(Room room);
+
 }

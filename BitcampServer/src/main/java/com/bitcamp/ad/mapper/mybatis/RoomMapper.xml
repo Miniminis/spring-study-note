@@ -16,4 +16,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectRoomListByHotel" parameterType="int" resultType="com.bitcamp.ad.domain.Room">
 		select * from room where hotelnum = #{hotelnum} order by roomnum desc;
 	</select>
+	
+	<!-- 3. 방 삭제 -->
+	<delete id="deleteByRoomNum" parameterType="int">
+		delete from room where roomnum=#{roomnum};
+	</delete>
+	
+	<!-- 4. 호텔번호, 호텔이름 받아오기 위한 select 문 -->
+	<select id="selectByRoomnum" parameterType="int" resultType="com.bitcamp.ad.domain.Room">
+		select * from room where roomnum=#{roomnum};
+	</select>
+	
+	<!-- 5. 호텔 정보 수정 -->
+	<update id="editRoom" parameterType="com.bitcamp.ad.domain.Room">
+		update room set roomname=#{roomname}, roomimg=#{roomimg}, maxppl=#{maxppl}, intro=#{intro}, price=#{price}, convenience=#{convenience}  where roomnum=#{roomnum};
+	</update>
 </mapper>

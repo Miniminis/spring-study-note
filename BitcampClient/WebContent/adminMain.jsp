@@ -164,6 +164,70 @@
 	  </div>
 	</div>
 	
+	<!-- 호텔 방 수정 MODAL -->
+	<div id="editFormModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <form id="editForm">
+	          <input type="text" id="roomNum" name="roomnum" value="" >
+	      	  <input type="text" id="oldRoomPhoto" name="oldRoomPhoto" value="" >
+	      	  
+	          <div class="form-group">
+	            <label for="rName" class="col-form-label">방 이름</label>
+	            <input type="text" class="form-control" id="rName" name="roomname">
+	          </div>
+	          <div class="input-group mb-3">
+				  <div class="input-group-prepend">
+				    <span class="input-group-text" id="rImg">방 이미지</span>
+				  </div>
+				  <div class="custom-file">
+				    <input type="file" class="custom-file-input" id="rImg" name="roomimg" aria-describedby="inputGroupFileAddon01">
+				    <label class="custom-file-label" for="rImg">탐색</label>
+				  </div>
+			  </div>
+			  <div class="form-group">
+	            <label for="rppl" class="col-form-label">최대 수용 인원</label>
+	            <select class="custom-select" id="rppl" name="maxppl">
+				    <option selected>선택</option>
+				    <option value="2">2명</option>
+				    <option value="4">4명</option>
+				    <option value="8">8명</option>
+				    <option value="20">20명</option>
+				  </select>
+	          </div>
+	          <div class="form-group">
+	            <label for="rPrice" class="col-form-label">방 가격</label>
+	            <input type="number" class="form-control" id="rPrice" name="price">
+	          </div>
+	          <div class="form-group">
+	            <label for="rConvenience" class="col-form-label">편의시설</label>
+	            <select class="custom-select" id="rConvenience" name="convenience">
+				    <option selected>선택</option>
+				    <option value="Y">있음</option>
+				    <option value="N">없음</option>
+				  </select>
+	          </div>
+	          <div class="form-group">
+	            <label for="rIntro" class="col-form-label">방 소개 </label>
+	            <textarea class="form-control" id="rIntro" name="intro"></textarea>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button onclick="submitEditForm()" type="button" class="btn btn-primary">변경내용저장</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<!-- 룸 예약 리스트  -->
 	
 </body>

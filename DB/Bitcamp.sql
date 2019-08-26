@@ -27,8 +27,12 @@ drop table room;
 desc room;
 select * from room;
 
+delete from room where roomnum=1;
+
 insert into room values(null, 2222	,'hotel03', '반짝룸', default, '4', '어서오세여', 5000, 'Y');
 select * from room where hotelnum = 2579389 order by roomnum desc;
 
+select * from room where roomnum=2;
 
-
+select * from room;
+update room set roomname='구름룸룸'  where roomnum=2;
