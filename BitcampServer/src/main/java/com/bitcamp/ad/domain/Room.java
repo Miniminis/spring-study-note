@@ -120,8 +120,10 @@ public class Room {
 	@Override
 	public String toString() {
 		return "Room [roomnum=" + roomnum + ", hotelnum=" + hotelnum + ", hotelname=" + hotelname + ", roomname="
-				+ roomname + ", roomimg=" + roomimg + ", maxppl=" + maxppl + ", intro=" + intro + ", price=" + price
-				+ ", convenience=" + convenience + "]";
+				+ roomname + ", maxppl=" + maxppl + ", intro=" + intro + ", price=" + price + ", convenience="
+				+ convenience + "]";
 	}
+
+	
 
 }

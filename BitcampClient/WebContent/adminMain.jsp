@@ -15,13 +15,17 @@
 	.table th {
 		width : 150px;
 	}
+	
+	.righty {
+		text-align: right;
+	}
 </style>
 </head>
 <body>
 	<h1>ADMIN PAGE</h1>
 	
 	<!-- 호텔리스트 -->
-	<div >
+	<div>
 		<h2> 호텔리스트 api </h2>
 		<div class="container">
 			<div id="hotelList" class="row">
@@ -70,13 +74,13 @@
 			</table>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 	
-	<!-- 호텔 방 등록 -->
+	<!-- 호텔 방 등록 MODAL -->
 	<div id="roomAddModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -88,8 +92,8 @@
 	      </div>
 	      <div class="modal-body">
 	        <form id="roomAddForm">
-	      	  <input type="text" id="hotelnum" name="hotelnum" value="" >
-	      	  <input type="text" id="hotelname" name="hotelname" value="" >
+	      	  <input type="hidden" id="hotelnum" name="hotelnum" value="" >
+	      	  <input type="hidden" id="hotelname" name="hotelname" value="" >
 	          <div class="form-group">
 	            <label for="roomname" class="col-form-label">방 이름</label>
 	            <input type="text" class="form-control" id="roomname" name="roomname">
@@ -127,13 +131,34 @@
 	          </div>
 	          <div class="form-group">
 	            <label for="intro" class="col-form-label">방 소개 </label>
-	            <textarea class="form-control" id="intro"></textarea>
+	            <textarea class="form-control" id="intro" name="intro"></textarea>
 	          </div>
 	        </form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button"  onclick="submitAddForm()" class="btn btn-primary">Send message</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button type="button"  onclick="submitAddForm()" class="btn btn-primary">등록</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
+	<!-- 각 호텔 별 룸 리스트 MODAL -->
+	<div id="roomListModal" class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-scrollable" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <!-- 방 리스트 출력  -->
+	      </div>
+	      <div class="modal-footer">
+	        <button id="roomListCloseBtn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
 	  </div>

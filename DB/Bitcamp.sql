@@ -16,7 +16,7 @@ CREATE TABLE room (
     hotelnum	int(10)		NOT NULL,
 	hotelname   VARCHAR(100)  NOT NULL, -- hotelname
 	roomname    VARCHAR(50)  NOT NULL, -- roomname
-	roomimg     VARCHAR(255) default '/image/noImg.png', -- roomimg
+	roomimg     VARCHAR(255) default '/image/noImg.png' not null, -- roomimg
 	maxppl      int(7)      NOT NULL, -- maxppl
 	intro       VARCHAR(255) NULL,     -- intro
 	price       int(7)      NOT NULL, -- price
@@ -27,8 +27,8 @@ drop table room;
 desc room;
 select * from room;
 
-insert into room values(null, 1	,'hotel01', '별빛룸', null, '4', '어서오세여', 5000, 'Y');
-
+insert into room values(null, 2222	,'hotel03', '반짝룸', default, '4', '어서오세여', 5000, 'Y');
+select * from room where hotelnum = 2579389 order by roomnum desc;
 
 
 

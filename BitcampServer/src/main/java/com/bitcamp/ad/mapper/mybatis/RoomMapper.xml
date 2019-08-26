@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE mapper 
-	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <!-- namespace: 필수속성! - DAO 에서 식별하기 위함! -->
 <mapper namespace="com.bitcamp.ad.dao.RoomSessionDao">
+
+	<!-- 1. 신규 방 정보 등록 -->
+	<insert id="insert" parameterType="com.bitcamp.ad.domain.Room">
+		insert into room values(null, #{hotelnum}, #{hotelname}, #{roomname}, #{roomimg}, #{maxppl}, #{intro}, #{price}, #{convenience});
+	</insert>
 	
+	<!-- 2. 호텔 별 방 리스트 출력   -->
+	<select id="selectRoomListByHotel" parameterType="int" resultType="com.bitcamp.ad.domain.Room">
+		select * from room where hotelnum = #{hotelnum} order by roomnum desc;
+	</select>
 </mapper>

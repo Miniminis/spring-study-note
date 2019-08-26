@@ -27,12 +27,12 @@
 	</bean>
     
     <!-- 트랜잭션 관리를 위한 PlatformTransactionManager 빈 설정 -->
-	<!-- <bean id="transactionManager"
+	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"  
 		p:dataSource-ref="dataSource">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	 -->
+	 
 	<!-- @Transactional 애노테이션 활성화 설정 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>	
 </beans>
