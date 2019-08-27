@@ -39,10 +39,6 @@ select * from room;
 update room set availability='N'  where roomnum=1;
 
 
-
-
-
-
 CREATE TABLE `booking` (
   `IDX` int(6) NOT NULL AUTO_INCREMENT,
   `H_NAME` varchar(50) COLLATE utf8_bin DEFAULT NULL,
@@ -55,4 +51,6 @@ CREATE TABLE `booking` (
   `R_PRICE` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `uId` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`IDX`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+desc booking;

@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+/* COMMON SETTING */
+.table th {
+	width : 150px;
+}
+
+.righty {
+	text-align: right;
+}
+
+.mr-01 {
+	margin-right: 5px;
+}
+
+.mr-02 {
+	margin-top: 20px;
+}
+
+.modal {
+	z-index: 10000000;
+}
+
+/* 호텔 리스트  */
+#hotelList, 
+#hotelListPage {
+	text-align: center;
+}
+
+#hotelListPage {
+	/* background-color: #F9F9F9; */
+	width : 500px;
+	margin : 30px auto;
+}
+#hotelItem {
+	/* background-color: #F9F9F9; */
+	height: 550px;
+	/* border: 1px solid #1BBCA3;
+	border-radius: 10px; */
+}
+
+.card-body {
+	height: 170px;
+}
+
+.card-footer {
+	/* background-color: #F9F9F9; */
+}
+
+/* @media (min-width: 992px) 
+.card-shape {
+    width: 30%;
+    margin-right: 15px;
+    margin-bottom: 15px;
+} */
+
+
+/* 호텔 방 목록  */
+.card {
+	max-width: 540px; 
+	height: 300px;
+}

@@ -48,7 +48,7 @@ public class HotelController {
 		param += "&MobileApp=Bitcamp";
 		param += "&listYN=Y";
 		param += "&arrange=A";
-		param += "&numOfRows="+ 9;
+		param += "&numOfRows="+ 3;
 		param += "&pageNo="+ pageNo;
 		param += "&_type=json";
 		

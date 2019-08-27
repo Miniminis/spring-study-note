@@ -9,11 +9,17 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- Mysql Datasource -->
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"> 
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"> 
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
         <property name="url" value="jdbc:mysql://localhost:3306/project?characterEncoding=utf8"/> 
         <property name="username" value="bit"/> 
         <property name="password" value="bit"/>
+    </bean> -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"> 
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
+        <property name="url" value="jdbc:mysql://localhost:3306/project?characterEncoding=utf8"/> 
+        <property name="username" value="admin"/>
+        <property name="password" value="test!dr!1229221"/>
     </bean>
     
     <!-- mybatis  -->

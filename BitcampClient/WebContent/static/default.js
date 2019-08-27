@@ -100,19 +100,19 @@ function hotelList(pageNo) {
 				var tel = itemlist[i].tel;
 				var contentid = itemlist[i].contentid;
 					
-				output += '<div class="col-md-4">';
-				output += '<img src="'+firstimage+'" class="card-img-top" alt="...">';
+				output += '<div id="hotelItem" class="col-md-4">';
+				output += '<img src="'+firstimage+'" class="card-img-top" width="100%" height="300px" >';
 				output += '<div class="card-body">';
-				output += '<h5 class="card-title">'+title+'</h5>';
+				output += '<h5 class="card-title mr-02">'+title+'</h5>';
 				output += '<p class="card-text">'+addr1+'</p>';
 				output += '<p class="card-text">'+tel+'</p>';
 				output += '</div>';		
 				output += '<div class="card-footer">';
 				output += '<small class="text-muted">';
-				output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-light">호텔소개</button>';
-				//output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-light">숙박상세정보</button>';
-				output += '<button data-toggle="modal" data-target="#roomListModal" data-id="'+contentid+'" data-title="'+title+'" data-keyboard="true" class="btn btn-light">방 목록 보기</button>';
-				output += '<button data-toggle="modal" data-target="#roomAddModal" data-id="'+contentid+'" data-title="'+title+'" data-keyboard="true" class="btn btn-light">새로운 방 등록</button>';
+				output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-skin mr-01">호텔소개</button>';
+				//output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-skin mr-01">숙박상세정보</button>';
+				output += '<button data-toggle="modal" data-target="#roomListModal" data-id="'+contentid+'" data-title="'+title+'" data-keyboard="true" class="btn btn-skin mr-01">방 목록 보기</button>';
+				output += '<button data-toggle="modal" data-target="#roomAddModal" data-id="'+contentid+'" data-title="'+title+'" data-keyboard="true" class="btn btn-skin mr-01">새로운 방 등록</button>';
 				output += '</small>';
 				output += '</div>';
 				output += '</div>';
@@ -150,7 +150,7 @@ function hotelList(pageNo) {
 			
 			pageNo = pageNo +1;
 			if(pageNo<=totalPageCount) {
-				paging += '<button id="moreListBtn" onclick="hotelList('+pageNo+')">더 많은 호텔 보기</button>';
+				paging += '<button id="moreListBtn" onclick="hotelList('+pageNo+')" class="btn btn-skin btn-lg btn-block">더 많은 호텔 보기</button>';
 				$('#hotelListPage').append(paging);
 			} else {
 				$('#paging').remove();
@@ -240,7 +240,7 @@ function hotelRoomList() {
 						 var price = data[i].price;
 						 var convenience = data[i].convenience;
 				
-						output += '<div class="card mb-3" style="max-width: 540px;">';
+						output += '<div class="card mb-3">';
 						output += '<div class="row no-gutters">';
 						output += '<div class="col-md-4">';
 						output += '<img src="..." class="card-img" alt="..." value="">';
@@ -258,8 +258,8 @@ function hotelRoomList() {
 						output += '<tr><th scope="row">편의시설</th><td>'+convenience+'</td></tr>';
 						output += '<tr><th scope="row">소개</th><td>'+intro+'</td></tr>';
 						output += '<tr><td colspan="2" class="righty">';
-						output += '<button id="editBtn" type="button" data-toggle="modal" data-target="#editFormModal" data-roomnum="'+roomnum+'" data-image="'+roomimg+'" data-roomname="'+roomname+'" data-maxppl="'+maxppl +'" data-intro="'+intro+'" data-price="'+price+'" data-convenience="'+convenience+'"  class="btn btn-secondary mr-1">수정</button>';
-						output += '<button id="delBnt" onclick="delRoom('+roomnum+')" type="button" class="btn btn-secondary">삭제</button>';
+						output += '<button id="editBtn" type="button" data-toggle="modal" data-target="#editFormModal" data-roomnum="'+roomnum+'" data-image="'+roomimg+'" data-roomname="'+roomname+'" data-maxppl="'+maxppl +'" data-intro="'+intro+'" data-price="'+price+'" data-convenience="'+convenience+'"  class="btn btn-skin mr-01">수정</button>';
+						output += '<button id="delBnt" onclick="delRoom('+roomnum+')" type="button" class="btn btn-skin">삭제</button>';
 						output += '</td></tr>';
 						output += '</tbody>';
 						output += '</table></div></div></div></div>';
