@@ -12,11 +12,12 @@ public class AddRoomForm {
 	private String intro;
 	private int price;
 	private char convenience;
+	private char availability;
 	
 	public AddRoomForm() {}
 
 	public AddRoomForm(int hotelnum, String hotelname, String roomname, MultipartFile roomimg, int maxppl, String intro,
-			int price, char convenience) {
+			int price, char convenience, char availability) {
 		super();
 		this.hotelnum = hotelnum;
 		this.hotelname = hotelname;
@@ -26,9 +27,8 @@ public class AddRoomForm {
 		this.intro = intro;
 		this.price = price;
 		this.convenience = convenience;
+		this.availability = availability;
 	}
-
-	
 
 	public int getHotelnum() {
 		return hotelnum;
@@ -110,6 +110,7 @@ public class AddRoomForm {
 		room.setMaxppl(maxppl);
 		room.setIntro(intro);
 		room.setConvenience(convenience);
+		room.setAvailability('Y'); //최초 방 등록시에는 예약 가능이 default 
 		//file 은 service 단에서 추가 
 		
 		return room;

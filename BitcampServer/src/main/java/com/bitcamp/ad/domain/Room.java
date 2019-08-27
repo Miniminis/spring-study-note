@@ -12,12 +12,15 @@ public class Room {
 	private String intro; //toRoom()
 	private int price; //toRoom()
 	private char convenience; //toRoom()
+	private char availability;
 
 	
 	public Room () {}
 
+	
+
 	public Room(int roomnum, int hotelnum, String hotelname, String roomname, String roomimg, int maxppl, String intro,
-			int price, char convenience) {
+			int price, char convenience, char availability) {
 		super();
 		this.roomnum = roomnum;
 		this.hotelnum = hotelnum;
@@ -28,7 +31,10 @@ public class Room {
 		this.intro = intro;
 		this.price = price;
 		this.convenience = convenience;
+		this.availability = availability;
 	}
+
+
 
 	public int getRoomnum() {
 		return roomnum;
@@ -116,12 +122,24 @@ public class Room {
 	public void setConvenience(char convenience) {
 		this.convenience = convenience;
 	}
+	
+	
+
+	public char getAvailability() {
+		return availability;
+	}
+
+
+
+	public void setAvailability(char availability) {
+		this.availability = availability;
+	}
 
 	@Override
 	public String toString() {
 		return "Room [roomnum=" + roomnum + ", hotelnum=" + hotelnum + ", hotelname=" + hotelname + ", roomname="
-				+ roomname + ", maxppl=" + maxppl + ", intro=" + intro + ", price=" + price + ", convenience="
-				+ convenience + "]";
+				+ roomname + ", roomimg=" + roomimg + ", maxppl=" + maxppl + ", intro=" + intro + ", price=" + price
+				+ ", convenience=" + convenience + ", availability=" + availability + "]";
 	}
 
 }
