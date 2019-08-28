@@ -32,7 +32,8 @@ public class HotelController {
 								) throws IOException {
 		
 		req.setCharacterEncoding("utf-8"); 
-		rep.setContentType("text/html; charset=utf-8");
+		//rep.setContentType("text/html; charset=utf-8");
+		rep.setContentType("application/json; charset=utf-8");
 		
 		System.out.println("여기 오니 02  "+pageNo);
 
@@ -94,7 +95,8 @@ public class HotelController {
 								) throws IOException {
 		
 		req.setCharacterEncoding("utf-8"); 
-		rep.setContentType("text/html; charset=utf-8");
+		//rep.setContentType("text/html; charset=utf-8");
+		rep.setContentType("application/json; charset=utf-8");
 		
 		System.out.println("상세보기 02 "+contentid);
 		

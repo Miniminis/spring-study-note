@@ -72,8 +72,8 @@ function hotelList(pageNo) {
 	$('#moreListBtn').remove();
 	
 	$.ajax({ 
-		url: 'http://localhost:8080/ad/api/hotel',
-		//url: 'http://13.125.249.209:8080/testBitcampServer/ad/api/hotel',
+		//url: 'http://localhost:8080/ad/api/hotel',
+		url: 'http://13.125.249.209:8080/admin/api/hotel',
 		type: 'get',
 		data: {pageNo:pageNo},
 		dataType: 'json',
@@ -173,8 +173,8 @@ function hotelDetailPage() {
 		var modal = $(this);
 		
 		$.ajax({
-			url: 'http://localhost:8080/ad/api/hotel/'+contentid,
-			//url: 'http://13.125.249.209:8080/testBitcampServer/ad/api/hotel'+contentid,
+			//url: 'http://localhost:8080/ad/api/hotel/'+contentid,
+			url: 'http://13.125.249.209:8080/admin/api/hotel/'+contentid,
 			type: 'get',
 			dataType: 'json',
 			success: function(data) {
@@ -219,8 +219,8 @@ function hotelRoomList() {
 		 //alert('방 리스트 01 '+contentid);
 		 
 		 $.ajax({
-			 url : 'http://localhost:8080/ad/api/hotel/room/'+contentid,
-			 //url : 'http://13.125.249.209:8080/testBitcampServer/ad/api/hotel'+contentid,
+			 //url : 'http://localhost:8080/ad/api/hotel/room/'+contentid,
+			 url : 'http://13.125.249.209:8080/admin/api/hotel/'+contentid,
 			 type: 'get',
 			 //dataType: 'json',
 			 success : function(data) {
@@ -285,7 +285,8 @@ function submitAddForm() {
 	//alert('방 등록 01-1 '+data);
 	
 	$.ajax({
-		url : 'http://localhost:8080/ad/api/hotel/room',
+		//url : 'http://localhost:8080/ad/api/hotel/room/',
+		url : 'http://13.125.249.209:8080/admin/api/hotel/room',
 		type: 'post',
 		data : data,
 		enctype: 'multipart/form-data',
@@ -309,7 +310,8 @@ function delRoom(roomnum) {
 	
 	if(confirm('삭제된 방의 정보는 다시 복구할 수 없습니다. 정말 삭제하시겠습니까? ')) {
 		$.ajax({
-			url : 'http://localhost:8080/ad/api/hotel/room/'+roomnum,
+			//url : 'http://localhost:8080/ad/api/hotel/room/'+roomnum,
+			url : 'http://13.125.249.209:8080/admin/api/hotel/room/'+roomnum,
 			type: 'delete',
 			success : function(data) {
 				if(data>0) {
@@ -341,7 +343,8 @@ function submitEditForm() {
 	alert('방 정보 수정 03 '+roomnum);
 	
 	$.ajax({
-		url: 'http://localhost:8080/ad/api/hotel/room/'+roomnum,
+		//url: 'http://localhost:8080/ad/api/hotel/room/'+roomnum,
+		url: 'http://13.125.249.209:8080/admin/api/hotel/room/'+roomnum,
 		type: 'put',
 		//data : data,
 		data : JSON.stringify(data),
@@ -358,3 +361,7 @@ function submitEditForm() {
 	})
 }
 
+
+/*예약현황 리스트*/
+
+/*리뷰 리스트*/

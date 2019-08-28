@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
 public class ApiTest {
 	
 	//호텔리스트 from Tour API
-	@GetMapping()
-	@CrossOrigin
+	//@GetMapping()
+	//@CrossOrigin
 	public void test (HttpServletRequest req, 
 						HttpServletResponse rep) throws IOException {
 		
