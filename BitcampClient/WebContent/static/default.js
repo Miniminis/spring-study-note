@@ -3,7 +3,10 @@ $(document).ready(function(){
 	//alert('뿅');
 	hotelList(1); //최초 리스트 출력 : default pageNo=1
 	hotelDetailPage(); //호텔상세보기
-	hotelRoomList();
+	hotelRoomList(); //호텔별 방 리스트 
+	bookingList(); //예약 현황 리스트
+	//리뷰 리스트
+	//회원 리스트
 	
 	//호텔 방 등록 폼 모달 열기 
 	$('#roomAddModal').on('show.bs.modal', function (event) {
@@ -363,5 +366,37 @@ function submitEditForm() {
 
 
 /*예약현황 리스트*/
+function bookingList(){
+	$.ajax({
+		url : 'http://15.164.100.85:8080/booking/rest/booking',
+		type: 'get',
+		success : function(data) {
+			
+			var text = '';
+			
+			for(var i=0; i<data.length; i++) {
+				//console.log('예약리스트 :  '+data[i].idx);
+				
+				text += '<div class="col-md-3 bookingItem">';
+				text += '<table class="table table-striped">';
+				text += '<thead><tr><th scope="col">예약번호</th><th scope="col">'+data[i].idx+'</th></tr></thead>';
+				text += '<tbody>';
+				text += '<tr><th scope="row">회원 아이디</th><td>'+data[i].uId+'</td></tr>';
+				text += '<tr><th scope="row">호텔 이름</th><td>'+data[i].h_name+'</td></tr>';
+				text += '<tr><th scope="row">방 이름</th><td>'+data[i].r_name+'</td></tr>';
+				text += '<tr><th scope="row">가격</th><td>'+data[i].r_price+'</td></tr>';
+				text += '<tr><th scope="row">체크 인</th><td>'+data[i].s_date+'</td></tr>';
+				text += '<tr><th scope="row">체크 아웃</th><td>'+data[i].e_date+'</td></tr>';
+				text += '<tr><th scope="row">예약일</th><td>'+data[i].b_date+'</td></tr>';
+				text += '</tbody>';
+				text += '</table>';
+				text += '</div>';
+			}
+			
+			$('#bookingList').html(text);
+		}
+	})
+}
 
 /*리뷰 리스트*/
+
