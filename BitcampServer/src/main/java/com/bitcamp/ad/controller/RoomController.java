@@ -21,6 +21,7 @@ import com.bitcamp.ad.domain.Room;
 import com.bitcamp.ad.service.AddService;
 import com.bitcamp.ad.service.DeleteService;
 import com.bitcamp.ad.service.EditService;
+import com.bitcamp.ad.service.GetRoomService;
 import com.bitcamp.ad.service.ListService;
 
 @RestController
@@ -39,6 +40,9 @@ public class RoomController {
 	@Autowired
 	private EditService editService;
 	
+	@Autowired
+	private GetRoomService getRoomService;
+	
 	//호텔별 방 리스트 출력
 	@GetMapping("/{id}")
 	@CrossOrigin
@@ -49,6 +53,18 @@ public class RoomController {
 		return listService.getRoomList(hotelnum);
 		
 	};
+	
+	//특정 호텔의 특정 방 출력 
+	@GetMapping("/{id}/{idx}")
+	@CrossOrigin
+	public Room getRoom(@PathVariable("id") int hotelnum, 
+						@PathVariable("idx") int roomnum) {
+		
+		//어차피 roomnum 은 pk 이므로 hotelnum은 보낼 필요가 없음 
+		return getRoomService.getOneRoom(roomnum);
+		
+	}
+		
 	
 	//새로운 방 등록 
 	@PostMapping()

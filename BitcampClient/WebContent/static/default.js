@@ -220,7 +220,7 @@ function hotelRoomList() {
 		 
 		 $.ajax({
 			 //url : 'http://localhost:8080/ad/api/hotel/room/'+contentid,
-			 url : 'http://13.125.249.209:8080/admin/api/hotel/'+contentid,
+			 url : 'http://13.125.249.209:8080/admin/api/hotel/room/'+contentid,
 			 type: 'get',
 			 //dataType: 'json',
 			 success : function(data) {

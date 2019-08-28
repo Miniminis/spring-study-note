@@ -15,8 +15,8 @@ function hotelList(pageNo) {
 	$('#moreListBtn').remove();
 	
 	$.ajax({ 
-		url: 'http://localhost:8080/ad/api/hotel',
-		//url: 'http://13.125.249.209:8080/testBitcampServer/ad/api/hotel',
+		//url: 'http://localhost:8080/ad/api/hotel',
+		url: 'http://13.125.249.209:8080/admin/api/hotel',
 		type: 'get',
 		data: {pageNo:pageNo},
 		dataType: 'json',
@@ -43,18 +43,18 @@ function hotelList(pageNo) {
 				var tel = itemlist[i].tel;
 				var contentid = itemlist[i].contentid;
 					
-				output += '<div class="col-md-4">';
-				output += '<img src="'+firstimage+'" class="card-img-top" alt="...">';
+				output += '<div id="hotelItem" class="col-md-4">';
+				output += '<img src="'+firstimage+'" class="card-img-top" width="100%" height="300px" >';
 				output += '<div class="card-body">';
-				output += '<h5 class="card-title">'+title+'</h5>';
+				output += '<h5 class="card-title mr-02">'+title+'</h5>';
 				output += '<p class="card-text">'+addr1+'</p>';
 				output += '<p class="card-text">'+tel+'</p>';
 				output += '</div>';		
 				output += '<div class="card-footer">';
 				output += '<small class="text-muted">';
-				output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-light">호텔소개</button>';
-				//output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-light">숙박상세정보</button>';
-				output += '<button data-toggle="modal" data-target="#roomListModal" data-id="'+contentid+'" data-title="'+title+'" data-keyboard="true" class="btn btn-light">방 목록 보기</button>';
+				output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-skin mr-01">호텔소개</button>';
+				//output += '<button data-toggle="modal" data-target="#hotelDetail" data-id="'+contentid+'" data-keyboard="true" class="btn btn-skin mr-01">숙박상세정보</button>';
+				output += '<button data-toggle="modal" data-target="#roomListModal" data-id="'+contentid+'" data-title="'+title+'" data-keyboard="true" class="btn btn-skin mr-01">방 목록 보기</button>';
 				output += '</small>';
 				output += '</div>';
 				output += '</div>';
@@ -92,7 +92,7 @@ function hotelList(pageNo) {
 			
 			pageNo = pageNo +1;
 			if(pageNo<=totalPageCount) {
-				paging += '<button id="moreListBtn" onclick="hotelList('+pageNo+')">더 많은 호텔 보기</button>';
+				paging += '<button id="moreListBtn" onclick="hotelList('+pageNo+')" class="btn btn-skin btn-lg btn-block">더 많은 호텔 보기</button>';
 				$('#hotelListPage').append(paging);
 			} else {
 				$('#paging').remove();
@@ -115,8 +115,8 @@ function hotelDetailPage() {
 		var modal = $(this);
 		
 		$.ajax({
-			url: 'http://localhost:8080/ad/api/hotel/'+contentid,
-			//url: 'http://13.125.249.209:8080/testBitcampServer/ad/api/hotel'+contentid,
+			//url: 'http://localhost:8080/ad/api/hotel/'+contentid,
+			url: 'http://13.125.249.209:8080/admin/api/hotel/'+contentid,
 			type: 'get',
 			dataType: 'json',
 			success: function(data) {
@@ -161,8 +161,8 @@ function hotelRoomList() {
 		 //alert('방 리스트 01 '+contentid);
 		 
 		 $.ajax({
-			 url : 'http://localhost:8080/ad/api/hotel/room/'+contentid,
-			 //url : 'http://13.125.249.209:8080/testBitcampServer/ad/api/hotel'+contentid,
+			 //url : 'http://localhost:8080/ad/api/hotel/room/'+contentid,
+			 url : 'http://13.125.249.209:8080/admin/api/hotel/room/'+contentid,
 			 type: 'get',
 			 //dataType: 'json',
 			 success : function(data) {
@@ -182,7 +182,7 @@ function hotelRoomList() {
 						 var price = data[i].price;
 						 var convenience = data[i].convenience;
 				
-						output += '<div class="card mb-3" style="max-width: 540px;">';
+						output += '<div class="card mb-3">';
 						output += '<div class="row no-gutters">';
 						output += '<div class="col-md-4">';
 						output += '<img src="..." class="card-img" alt="..." value="">';
@@ -200,8 +200,7 @@ function hotelRoomList() {
 						output += '<tr><th scope="row">편의시설</th><td>'+convenience+'</td></tr>';
 						output += '<tr><th scope="row">소개</th><td>'+intro+'</td></tr>';
 						output += '<tr><td colspan="2" class="righty">';
-						output += '<button onclick="goBookingBtn('+roomnum+')" class="btn btn-secondary mr-1">예약</button>';
-						output += '</td></tr>';
+						output += '<button onclick="resvAction('+contentid+', '+roomnum+')" class="btn btn-skin">예약</button></td></tr>';
 						output += '</tbody>';
 						output += '</table></div></div></div></div>';
 						
@@ -214,4 +213,39 @@ function hotelRoomList() {
 			 }
 		 })
 	}) 
+} 
+
+
+/*방 페이지에서 예약 버튼 작동시*/
+function resvAction(contentid, roomnum) {
+	//$('#roomListModal').hide();
+	//alert(contentid);
+	//alert(roomnum);
+	location.href='#sectionReserv'; //예약 진행 스크롤로 이동 
+	$('#roomListModal').modal('hide'); //이동과 함께 모달 숨기기
+	
+	$.ajax({
+		//url : 'http://localhost:8080/ad/api/hotel/room/'+contentid+'/'+roomnum,
+		url : 'http://13.125.249.209:8080/admin/api/hotel/room/'+contentid+'/'+roomnum,
+		type: 'get',
+		success : function(data) {
+			//Room 에서 받아올 수 있는 정보들 표시 
+			/*alert('성공!' + data.roomnum);
+			alert('성공!' + data.hotelnum);
+			alert('성공!' + data.hotelname);
+			alert('성공!' + data.roomname);
+			alert('성공!' + data.roomimg);
+			alert('성공!' + data.maxppl);
+			alert('성공!' + data.intro);
+			alert('성공!' + data.price);
+			alert('성공!' + data.convenience);
+			alert('성공!' + data.availability);*/
+		},
+		error : function(e) {
+			alert(e);
+		}
+
+	})
+	
 }
+

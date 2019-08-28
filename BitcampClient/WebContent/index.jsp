@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>비트캠프 : 관리자 페이지</title>
+<title>비트캠프 | 관리자 페이지</title>
 
 <!-- css -->
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -227,7 +227,7 @@
 	        <!-- 방 리스트 출력  -->
 	      </div>
 	      <div class="modal-footer">
-	        <button id="roomListCloseBtn" type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button id="roomListCloseBtn" type="button" class="btn btn-skin" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
 	  </div>

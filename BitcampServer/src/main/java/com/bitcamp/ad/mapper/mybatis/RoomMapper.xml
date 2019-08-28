@@ -30,5 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 5. 호텔 정보 수정 -->
 	<update id="editRoom" parameterType="com.bitcamp.ad.domain.Room">
 		update room set roomname=#{roomname}, roomimg=#{roomimg}, maxppl=#{maxppl}, intro=#{intro}, price=#{price}, convenience=#{convenience}  where roomnum=#{roomnum};
-	</update>	
+	</update>
+	
+	<!-- 6. 특정 방 정보 1개 출력 -->
+	<select id="selectRoomByRoomnum" parameterType="int" resultType="com.bitcamp.ad.domain.Room" >
+		select * from room where roomnum=#{roomnum};
+	</select>	
 </mapper>

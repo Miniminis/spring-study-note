@@ -16,4 +16,6 @@ public interface RoomSessionDao {
 
 	public int editRoom(Room room);
 
+	public Room selectRoomByRoomnum(int roomnum);
+
 }
