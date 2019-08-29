@@ -20,6 +20,11 @@
 		text-align: right;
 	}
 </style>
+
+<script>
+
+</script>
+
 </head>
 <body>
 	<h1>ADMIN PAGE</h1>

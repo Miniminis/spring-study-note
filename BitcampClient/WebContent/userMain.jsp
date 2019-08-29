@@ -35,6 +35,12 @@
 <link href="static/user.css" rel="stylesheet" >
 <!-- bootstrap 3.1.1 버전과 4.3.1 버전 충돌 : 3.1.1 버전 유지하고 바뀐 부분만 스타일 적용하기로 결정함  -->
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
+
+<!-- 예약, 결제  -->
+<!-- Hotel CSS -->
+<link href="static/hotel.css" rel="stylesheet" >
+
+
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -76,73 +82,82 @@
   
   <!--메인 캐러셀  -->
   <section id="sectionMain" class="home-slide text-light">
-    <!-- Carousel -->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-      </ol>
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="img/slide1.jpg" alt="First slide">
-          <!-- Static Header -->
-          <div class="header-text hidden-xs">
-            <div class="col-md-12 text-center">
-              <h2><span>Welcome to Shuffle</span></h2>
-              <br>
-              <h3><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></h3>
-              <br>
-              <div class="">
-                <a class="btn btn-theme btn-sm btn-min-block" href="#about">About us</a><a class="btn btn-theme btn-sm btn-min-block" href="#works">Our works</a></div>
-            </div>
-          </div>
-          <!-- /header-text -->
-        </div>
-        <div class="item">
-          <img src="img/slide2.jpg" alt="Second slide">
-          <!-- Static Header -->
-          <div class="header-text hidden-xs">
-            <div class="col-md-12 text-center">
-              <h2><span>Awesome Bootstrap template</span></h2>
-              <br>
-              <h3><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></h3>
-              <br>
-              <div class="">
-                <a class="btn btn-theme btn-sm btn-min-block" href="#about">About us</a><a class="btn btn-theme btn-sm btn-min-block" href="#works">Our works</a></div>
-            </div>
-          </div>
-          <!-- /header-text -->
-        </div>
-        <div class="item">
-          <img src="img/slide3.jpg" alt="Third slide">
-          <!-- Static Header -->
-          <div class="header-text hidden-xs">
-            <div class="col-md-12 text-center">
-              <h2><span>Use without any charge</span></h2>
-              <br>
-              <h3><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span></h3>
-              <br>
-              <div class="">
-                <a class="btn btn-theme btn-sm btn-min-block" href="#about">About us</a><a class="btn btn-theme btn-sm btn-min-block" href="#works">Our works</a>
-              </div>
-            </div>
-          </div>
-          <!-- /header-text -->
-        </div>
-      </div>
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-		    <span class="glyphicon glyphicon-chevron-left"></span>
-			</a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-		    <span class="glyphicon glyphicon-chevron-right"></span>
-			</a>
-    </div>
-    <!-- /carousel -->
 
+	<!-- Carousel -->
+	<div id="carousel-example-generic" class="carousel "
+		data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		</ol>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+			<div class="item active">
+				<img
+					src="https://cdn.pixabay.com/photo/2014/07/20/17/01/hotel-room-key-397946_1280.jpg"
+					alt="First slide" style="height: 600px;">
+				<!-- Static Header -->
+				<div class="header-text hidden-xs">
+					<div class="col-md-12 text-center">
+						<br>
+						<br>
+						<h2 class="h-bold">
+							<span>Welcome to BitCamp</span>
+						</h2>
+						<br>
+						<h3 class="h-bold">
+							<span>cozy and comfort rooms Waiting for your happy
+								vacation</span>
+						</h3>
+						<br>
+						<div class="">
+							<a class="btn btn-theme btn-sm btn-min-block" href="#">Book</a><a
+								class="btn btn-theme btn-sm btn-min-block" href="#">Review</a>
+						</div>
+					</div>
+				</div>
+				<!-- /header-text -->
+			</div>
+			<div class="item">
+				<img
+					src="https://cdn.pixabay.com/photo/2017/09/15/16/57/room-2752817_1280.jpg"
+					alt="Second slide" style="height: 600px;">
+				<!-- Static Header -->
+				<div class="header-text hidden-xs">
+					<div class="col-md-12 text-center">
+						<br>
+						<br>
+						<h2 class="h-bold">
+							<span>Welcome to BitCamp</span>
+						</h2>
+						<br>
+						<h3 class="h-bold">
+							<span>cozy and comfort rooms Waiting for your happy
+								vacation</span>
+						</h3>
+						<br>
+						<div class="">
+							<a class="btn btn-theme btn-sm btn-min-block" href="#">Book</a><a
+								class="btn btn-theme btn-sm btn-min-block" href="#">Review</a>
+						</div>
+					</div>
+				</div>
+				<!-- /header-text -->
+			</div>
+
+			<!-- Controls -->
+		</div>
+		<a class="left carousel-control" href="#carousel-example-generic"
+			data-slide="prev"> <span
+			class="glyphicon glyphicon-chevron-left"></span>
+		</a> <a class="right carousel-control" href="#carousel-example-generic"
+			data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+	</div>
+	<!-- /carousel -->
   </section>
   <!--메인 캐러셀 페이지-->
 
@@ -186,7 +201,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      	<img src="">
+	      	<!-- <img src=""> -->
 	        <table class="table">
 			  <tbody>
 			    <tr>
@@ -241,94 +256,51 @@
 
 
   <!-- Section: 예약 페이지-->
-  <section id="sectionReserv" class="home-section color-dark bg-gray">
-    <div class="container marginbot-50">
-      <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-          <div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
-            <div class="section-heading text-center">
-              <h2 class="h-bold">예약진행</h2>
-              <div class="divider-header"></div>
-              <p>Lorem ipsum dolor sit amet, agam perfecto sensibus usu at duo ut iriure.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="text-center">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-md-3">
-            <div class="wow fadeInLeft" data-wow-delay="0.2s">
-              <div class="service-box">
-                <div class="service-icon">
-                  <span class="fa fa-cogs fa-5x"></span>
-                </div>
-                <div class="service-desc">
-                  <h5>Web Design</h5>
-                  <p>
-                    Ad denique euripidis signiferumque vim, iusto admodum quo cu. No tritani neglegentur mediocritatem duo.
-                  </p>
-                  <a href="#" class="btn btn-skin">Learn more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="wow fadeInUp" data-wow-delay="0.2s">
-              <div class="service-box">
-                <div class="service-icon">
-                  <span class="fa fa-camera fa-5x"></span>
-                </div>
-                <div class="service-desc">
-                  <h5>Photography</h5>
-                  <p>
-                    Ad denique euripidis signiferumque vim, iusto admodum quo cu. No tritani neglegentur mediocritatem duo.
-                  </p>
-                  <a href="#" class="btn btn-skin">Learn more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="wow fadeInUp" data-wow-delay="0.2s">
-              <div class="service-box">
-                <div class="service-icon">
-                  <span class="fa fa-laptop fa-5x"></span>
-                </div>
-                <div class="service-desc">
-                  <h5>Graphic design</h5>
-                  <p>
-                    Ad denique euripidis signiferumque vim, iusto admodum quo cu. No tritani neglegentur mediocritatem duo.
-                  </p>
-                  <a href="#" class="btn btn-skin">Learn more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="wow fadeInRight" data-wow-delay="0.2s">
-              <div class="service-box">
-                <div class="service-icon">
-                  <span class="fa fa-mobile-phone fa-5x"></span>
-                </div>
-                <div class="service-desc">
-                  <h5>Mobile apps</h5>
-                  <p>
-                    Ad denique euripidis signiferumque vim, iusto admodum quo cu. No tritani neglegentur mediocritatem duo.
-                  </p>
-                  <a href="#" class="btn btn-skin">Learn more</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+ <section id="sectionReserv" class="home-section color-dark bg-white">
+ <div class="container" id="container">
+   <!-- <a id="kakaopay-btn" style="cursor: pointer; width: 120px; height: 51px; display: inline-block; margin-bottom: -20px; margin-right: 30px; background-image: url(/kym/img/payment_medium.png);"></a> -->
+   	<h1 style="padding: 15px; border-bottom: 1px solid #CCCCCC;"> 예약 상세 내용 </h1>
+   	<form method="post" id="bForm">
+   		<div id="h_info">
+   			<h4>호텔 정보</h4>
+   			<img src="<c:url value="/resources/img/hotel.jpg" />" name="h_photo" id="h_photo">
+   			<div id="ho">
+   			<h5><input name="h_name" id="h_name" value="제주 신라 호텔" readonly></h5>
+   			<h6><input name="h_address" id="h_address" value="중문관광로72번길 75, 서귀포, 대한민국" readonly></h6>
+   			</div>
+   		</div>
+   		<!-- 방 리스트 출력  -->
+   		<div id="date">
+   			
+ 			<h4>체크인</h4>
+ 			<h5><input type="text" id="datepicker" name="s_date"></h5>
+  		<h4>체크아웃</h4>
+  		<h5><input type="text" id="datepicker2" name="e_date"></h5>
+ 		</div>
+   		<div id="r_info">
+   			<h4>룸 정보</h4>
+   			<h5><input name="r_name" id="r_name" value="디럭스 룸" readonly></h5>
+   			<h4>룸 가격</h4>
+   			<h5><input name="r_price" id="r_price" readonly></h5>
+   		</div>
+   		<h6 id="chkMsg"></h6>
+   		<div id="u_info">
+   			<h5 style="color: black; font-size:30px;"><input name="uId" id="uId" value="kytsaaa" style="background-color: #F5F4F1;"readonly> 님이 선택하신 예약 정보 입니다.</h5>
+   			<!-- <input name="b_date" id="b_date"> -->
+   		</div>
+   		
+   		<div id="button">
+   			<button id="submit" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" style="width:150px; border-radius: 10px;" >무통장 입금</button>
+   			<a id="kakaopay-btn" style="cursor: pointer; width: 120px; height: 51px; display: inline-block; float: left; background-image: url(/bitcamp/img/payment_medium.png);"></a>
+			<!-- <input type="submit" class="btn btn-outline-primary btn-lg" value="무통장입금"> -->
+   			<button id="reset" class="btn btn-lg btn-primary btn-block text-uppercase" type="reset" style="width:150px; border-radius: 10px;">이전</button>
+   			
+   		</div>
+   	</form>
+   
+   </div>
+ </section> 
+    
   <!-- /Section: 예약 페이지-->
 
 

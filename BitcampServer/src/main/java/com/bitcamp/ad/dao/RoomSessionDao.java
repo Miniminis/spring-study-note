@@ -2,6 +2,7 @@ package com.bitcamp.ad.dao;
 
 import java.util.List;
 
+import com.bitcamp.ad.domain.EditRoomForm;
 import com.bitcamp.ad.domain.Room;
 
 public interface RoomSessionDao {
@@ -14,8 +15,10 @@ public interface RoomSessionDao {
 
 	public Room selectByRoomnum(int roomnum);
 
-	public int editRoom(Room room);
+	public int editRoom(EditRoomForm room);
 
 	public Room selectRoomByRoomnum(int roomnum);
+
+	public int editRoomPhoto(String newFileName, int roomnum);
 
 }

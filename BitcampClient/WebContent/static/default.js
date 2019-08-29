@@ -6,7 +6,9 @@ $(document).ready(function(){
 	hotelRoomList(); //호텔별 방 리스트 
 	bookingList(); //예약 현황 리스트
 	//리뷰 리스트
-	//회원 리스트
+	memberList();//회원 리스트
+
+	//getUserIdx();
 	
 	//호텔 방 등록 폼 모달 열기 
 	$('#roomAddModal').on('show.bs.modal', function (event) {
@@ -244,12 +246,12 @@ function hotelRoomList() {
 						 var convenience = data[i].convenience;
 				
 						output += '<div class="card mb-3">';
+						output += '<div>';
 						output += '<div class="row no-gutters">';
-						output += '<div class="col-md-4">';
-						output += '<img src="..." class="card-img" alt="..." value="">';
-						//output += '<img src="<c:url value =\"/uploadedfile/roomPhoto\"/>" class="card-img" alt="..." value="">';
-						output += '</div>';
 						output += '<div class="col-md-8">';
+						output += '<img src="http://13.125.249.209:8080/admin/uploadedfile/roomPhoto/'+roomimg+'" class="card-img roomImg" >';
+						output += '</div>';
+						output += '<div class="col-md-4">';
 						output += '<div class="card-body">';
 						output += '<h5 class="card-title">'+roomname+'</h5>';
 						output += '<table class="table">';
@@ -265,7 +267,7 @@ function hotelRoomList() {
 						output += '<button id="delBnt" onclick="delRoom('+roomnum+')" type="button" class="btn btn-skin">삭제</button>';
 						output += '</td></tr>';
 						output += '</tbody>';
-						output += '</table></div></div></div></div>';
+						output += '</table></div></div></div></div></div>';
 						
 					 }
 					 
@@ -284,12 +286,14 @@ function submitAddForm() {
 	var roomFormData = $('#roomAddForm')[0];
 	var data = new FormData(roomFormData);
 	
+	//var file = $('#roomimg')[0];
+	//console.log('파일등록'+file);
 	//alert('방 등록 01 '+roomFormData );
 	//alert('방 등록 01-1 '+data);
 	
 	$.ajax({
-		//url : 'http://localhost:8080/ad/api/hotel/room/',
-		url : 'http://13.125.249.209:8080/admin/api/hotel/room',
+		url : 'http://localhost:8080/ad/api/hotel/room/',
+		//url : 'http://13.125.249.209:8080/admin/api/hotel/room',
 		type: 'post',
 		data : data,
 		enctype: 'multipart/form-data',
@@ -332,34 +336,79 @@ function delRoom(roomnum) {
 	}
 }
 
+
+/*방 수정 - 방사진파일*/
+function editRoomPhoto() {
+	//alert('요기서 사진 수정!');
+	var roomnum = $('#roomNum').val();
+	var rName = $('#rName').val();
+	var newPhoto = $('#rImg')[0].files[0]; 
+	var oldPhoto = $('#oldRoomPhoto').val();
+	
+	var formData = new FormData();
+	formData.append("roomimg", newPhoto);
+	formData.append("oldRoomPhoto", oldPhoto);
+	formData.append("roomname", rName);
+	formData.append("roomnum", roomnum);
+	
+	console.log('사진수정 01  '+roomnum);
+	console.log('사진수정 02  '+newPhoto);
+	console.log('사진수정 03  '+oldPhoto);
+	console.log('사진수정 04  '+formData);
+	console.log('사진수정 05  '+rName);
+	
+	$.ajax({
+		//url : 'http://localhost:8080/ad/api/hotel/room/photo',
+		url : 'http://13.125.249.209:8080/admin/api/hotel/room/photo',
+		type: 'post',
+		data : formData,
+		enctype: 'multipart/form-data',
+		processData: false,
+		contentType: false,
+		success : function(data) {
+			console.log(data+' 개의 사진 수정 성공');
+		},
+		error : function(e) {
+			console.log(e+'사진 수정실패');
+		}
+	})
+	
+}
+
+
 /*방수정*/
 function submitEditForm() {
 	
 	//수정을 위해 방번호 url에 추가 
 	var roomnum = $('#roomNum').val();
 	
-	var editFormData = $('#editForm')[0];
-	var data = new FormData(editFormData);
-	
-	alert('방 정보 수정 01 '+editFormData);
-	alert('방 정보 수정 02 '+data);
-	alert('방 정보 수정 03 '+roomnum);
+	//alert('방 정보 수정 0123 : '+roomnum);
 	
 	$.ajax({
 		//url: 'http://localhost:8080/ad/api/hotel/room/'+roomnum,
 		url: 'http://13.125.249.209:8080/admin/api/hotel/room/'+roomnum,
 		type: 'put',
-		//data : data,
-		data : JSON.stringify(data),
-		enctype: 'multipart/form-data',
-		processData: false,
-		//contentType: false,
+		data : JSON.stringify({
+			roomnum : roomnum,
+			roomname : $('#rName').val(),
+			maxppl : $('#rppl').val(),
+			price : $('#rPrice').val(),
+			convenience : $('#rConvenience').val(),
+			intro : $('#rIntro').val()
+		}),
 		contentType:'application/json;charset=UTF-8',
 		success : function(data) {
-			alert(data+' 개 방 정보 수정성공!');
+			alert(data+' 개의 방 정보가 수정되었습니다!');
+			$('#editFormModal').modal('hide');
+			$('#roomListModal').modal('hide');
+			hotelList(1);
 		},
 		error : function(e) {
-			alert(e);
+			console.log("ERROR 방정보 수정 ERROR : ", e);
+            alert("방 수정에 실패하였습니다ㅜㅠㅠㅠㅠ으엉어어엉! ");
+            $('#editFormModal').modal('hide');
+            $('#roomListModal').modal('hide');
+			hotelList(1);
 		}
 	})
 }
@@ -377,26 +426,160 @@ function bookingList(){
 			for(var i=0; i<data.length; i++) {
 				//console.log('예약리스트 :  '+data[i].idx);
 				
-				text += '<div class="col-md-3 bookingItem">';
-				text += '<table class="table table-striped">';
-				text += '<thead><tr><th scope="col">예약번호</th><th scope="col">'+data[i].idx+'</th></tr></thead>';
-				text += '<tbody>';
-				text += '<tr><th scope="row">회원 아이디</th><td>'+data[i].uId+'</td></tr>';
-				text += '<tr><th scope="row">호텔 이름</th><td>'+data[i].h_name+'</td></tr>';
-				text += '<tr><th scope="row">방 이름</th><td>'+data[i].r_name+'</td></tr>';
-				text += '<tr><th scope="row">가격</th><td>'+data[i].r_price+'</td></tr>';
-				text += '<tr><th scope="row">체크 인</th><td>'+data[i].s_date+'</td></tr>';
-				text += '<tr><th scope="row">체크 아웃</th><td>'+data[i].e_date+'</td></tr>';
-				text += '<tr><th scope="row">예약일</th><td>'+data[i].b_date+'</td></tr>';
-				text += '</tbody>';
-				text += '</table>';
-				text += '</div>';
+				text += '<tr>';
+				text += '<th scope="row">'+data[i].idx+'</th>';
+				text += '<td>'+data[i].uId+'</td>';
+				text += '<td>'+data[i].h_name+'</td>';
+				text += '<td>'+data[i].r_name+'</td>';
+				text += '<td>'+data[i].r_price+'</td>';
+				text += '<td>'+data[i].s_date+'</td>';
+				text += '<td>'+data[i].e_date+'</td>';
+				text += '<td>'+data[i].b_date+'</td>';
+				
 			}
 			
-			$('#bookingList').html(text);
+			$('#bookingListBody').html(text);
 		}
 	})
 }
 
 /*리뷰 리스트*/
+//function reviewList(){}
 
+/*회원리스트*/
+function memberList(){
+	$.ajax({
+		/* url:'http://localhost:8080/mc/rest/members', */
+		// restful로 우회접근
+//			url : 'http://localhost:8080/rc/list',
+		url : 'http://13.209.40.5:8080/rc/list',
+		type : 'GET',
+		success : function(data) {
+			/* alert(JSON.stringify(data)); */
+			var html = '';
+			for (var i = 0; i < data.length; i++) {
+
+				html += '<tr>\n';
+				html += '	<td>' + data[i].idx + '</td>\n';
+				html += '	<td>' + data[i].id + '</td>\n';
+				html += '	<td>' + data[i].name + '</td>\n';
+				html += '	<td>' + data[i].phone + '</td>\n';
+				html += '	<td>' + data[i].verify + '</td>\n';
+				html += '	<td>' + data[i].regdate + '</td>\n';
+				html += '	<td>' + data[i].out + '</td>\n';
+				html += '	<td><span class="btn_manage " onclick="edit('
+						+ data[i].idx + ')">edit</span>';
+				html += '	<span class="btn_manage" onclick="del(' + data[i].idx
+						+ ')">del</span></td>';
+				html += '</tr>\n';
+			}
+
+			$('#memberList').html(html);
+
+		}
+	});
+}
+
+
+/*회원 삭제*/
+function del(idx) {
+	if (confirm('delete??????')) {
+		$.ajax({
+//			url : 'http://localhost:8080/bitcamp/rest-users/' + idx + '/del',
+			url : 'http://13.209.40.5:8080/bitcamp/rest-users/' + idx + '/del',
+			type : 'PUT',
+			success : function(data) {
+
+				if (data == 'success') {
+					alert('삭제되었습니다');
+				} else {
+					alert('실-패');
+				}
+			},
+			error : function() {
+				alert('error ㅠㅠㅠㅠ');
+			},
+			complete : function() {
+				list();
+			}
+		});
+	}
+}
+
+/*회원 수정 정보 가져오기*/
+function edit(idx) {
+	if (confirm('정말 수정할거야?????리얼리????')) {
+		// data를 받아오는 타이밍이 달라져서 먼저 선언하고 넣어줘야 한다.
+		$('#sectionEditMember').css('display', 'block');
+		$('#sectionMember').css('display', 'none');
+		$.ajax({
+//			url : 'http://localhost:8080/bitcamp/rest-users/' + idx,
+			url : 'http://13.209.40.5:8080/bitcamp/rest-users/' + idx,
+			type : 'GET',
+			success : function(data) {
+				// alert(data.idx);
+				// alert(JSON.stringify(data));
+
+				// data =JSON.stringify(user);
+				$('#idx2').val(idx);
+				$('#id2').val(data.id);
+				$('#name2').val(data.name);
+				$('#phone2').val(data.phone);
+			},
+		});
+	}
+}
+
+// 회원수정 처리
+$('#editform').submit(function() {
+	var idx = $('#idx2').val();
+
+	$.ajax({
+//		url : 'http://localhost:8080/bitcamp/rest-users/' + idx,
+		url : 'http://13.209.40.5:8080/bitcamp/rest-users/' + idx,
+		type : 'PUT',
+		data : JSON.stringify({
+			idx : idx,
+			id : $('#id2').val(),
+			phone : $('#phone2').val(),
+			name : $('#name2').val()
+		}),
+		contentType : 'application/json; charset=utf-8',
+		success : function(data) {
+			alert(data);
+
+			if (data == 'success') {
+				alert('수정되었습니다');
+			} else {
+				alert('실-패');
+			}
+		},
+		error : function(data) {
+			alert('error ㅠㅠㅠㅠ');
+			alert(data);
+		},
+		complete : function() {
+			list();
+			$('#sectionEditMember').css('display', 'none');
+			$('#sectionMember').css('display', 'block');
+			// location.href = "#member";
+		}
+	});
+});
+
+
+//admin 로그인 세션
+/*function getUserIdx(){
+   $.ajax({
+      url:'http://13.125.249.209:8080/admin/index.jsp',
+      type: 'GET',
+      success: function(uIdx){
+         sessionStorage.setItem("userIdx", uIdx);
+         console.log(uIdx);
+      },
+      error: function(e){
+         console.log(e);
+      }
+   });
+}
+*/

@@ -16,7 +16,7 @@ CREATE TABLE room (
     hotelnum	int(10)		NOT NULL,
 	hotelname   VARCHAR(100)  NOT NULL, -- hotelname
 	roomname    VARCHAR(50)  NOT NULL, -- roomname
-	roomimg     VARCHAR(255) default '/image/noImg.png' not null, -- roomimg
+	roomimg     VARCHAR(255) default 'image/noImg.png' not null, -- roomimg
 	maxppl      int(7)      NOT NULL, -- maxppl
 	intro       VARCHAR(255) NULL,     -- intro
 	price       int(7)      NOT NULL, -- price
@@ -36,8 +36,8 @@ select * from room where hotelnum = 2579389 order by roomnum desc;
 select * from room where roomnum=2;
 
 select * from room;
-update room set availability='N'  where roomnum=1;
-
+update room set roomimg='image/noImg.png' where roomnum=3;
+select * from room where roomnum=3;
 
 CREATE TABLE `booking` (
   `IDX` int(6) NOT NULL AUTO_INCREMENT,

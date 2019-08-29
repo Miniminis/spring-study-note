@@ -58,7 +58,7 @@ public class AddService {
 		}
 		
 		room.setRoomimg(newfileName);
-		
+		System.out.println("방등록 04-1  "+newfileName);
 		System.out.println("방 등록 05 "+room.getRoomimg());
 		
 		//* 4. 완성된 room 객체 DAO 단으로 넘기기

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bitcamp.ad.domain.AddRoomForm;
 import com.bitcamp.ad.domain.EditRoomForm;
+import com.bitcamp.ad.domain.EditRoomPhoto;
 import com.bitcamp.ad.domain.Room;
 import com.bitcamp.ad.service.AddService;
 import com.bitcamp.ad.service.DeleteService;
@@ -91,16 +92,34 @@ public class RoomController {
 		
 	};
 	
-	//방 수정;
+	//방 수정 - 파일타입;
+	@PostMapping("/photo")
+	@CrossOrigin
+	public int editRoomPhoto(EditRoomPhoto editRoomPhoto, 
+								HttpServletRequest req) {
+		
+		System.out.println("사진수정06  "+editRoomPhoto.getRoomnum());
+		
+		System.out.println("사진수정07  "+editRoomPhoto);
+		
+		int rscnt = editService.editRoomPhoto(editRoomPhoto, req);
+		System.out.println("사진수정11  "+rscnt);
+		
+		return rscnt;
+	}
+	
+	//방 수정 - form ;
 	@PutMapping("/{id}")
 	@CrossOrigin
 	public int editRoom(@PathVariable("id") int roomnum,
-						@RequestBody EditRoomForm editRoomForm, 
-						HttpServletRequest req) {
+						@RequestBody EditRoomForm editRoomForm) {
+		
+		editRoomForm.setRoomnum(roomnum); //룸넘버 삽입
 		
 		System.out.println("방 정보 수정 04  " +roomnum);
 		System.out.println("방 정보 수정 05  " +editRoomForm);
-		return editService.editRoomInfo(roomnum, editRoomForm, req);
+		
+		return editService.editRoomInfo(editRoomForm);
 		
 	}
 	

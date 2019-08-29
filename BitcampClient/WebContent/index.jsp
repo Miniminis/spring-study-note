@@ -61,7 +61,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="#sectionHotel">호텔 리스트</a></li>
                 <li><a href="#sectionReserv">예약 현황</a></li>
-                <li><a href="#sectionReview">호텔 리뷰</a></li>
+                <!-- <li><a href="#sectionReview">호텔 리뷰</a></li> -->
                 <li><a href="#sectionMember">회원 관리</a></li>
               </ul>
             </div>
@@ -114,7 +114,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	      	<img src="">
+	      	<!-- <img src="" > -->
 	        <table class="table">
 			  <tbody>
 			    <tr>
@@ -165,13 +165,13 @@
 	            <label for="roomname" class="col-form-label">방 이름</label>
 	            <input type="text" class="form-control" id="roomname" name="roomname">
 	          </div>
-	          <div class="input-group mb-3">
-				  <div class="input-group-prepend">
+	          <div class="form-group mb-3">
+				  <!-- <div class="input-group-prepend">
 				    <span class="input-group-text" id="inputGroupFileAddon01">방 이미지</span>
-				  </div>
+				  </div> -->
 				  <div class="custom-file">
+				   <label class="custom-file-label" for="roomimg">탐색</label>
 				    <input type="file" class="custom-file-input" id="roomimg" name="roomimg" aria-describedby="inputGroupFileAddon01">
-				    <label class="custom-file-label" for="roomimg">탐색</label>
 				  </div>
 			  </div>
 			  <div class="form-group">
@@ -215,7 +215,7 @@
 	
 	<!-- 각 호텔 별 룸 리스트 MODAL -->
 	<div id="roomListModal" class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-scrollable" role="document">
+	  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
@@ -245,22 +245,24 @@
 	      </div>
 	      <div class="modal-body">
 	        <form id="editForm">
-	          <input type="text" id="roomNum" name="roomnum" value="" >
-	      	  <input type="text" id="oldRoomPhoto" name="oldRoomPhoto" value="" >
+	          <input type="hidden" id="roomNum" name="roomnum" value="" >
 	      	  
 	          <div class="form-group">
 	            <label for="rName" class="col-form-label">방 이름</label>
 	            <input type="text" class="form-control" id="rName" name="roomname">
 	          </div>
-	          <div class="input-group mb-3">
-				  <div class="input-group-prepend">
+	          
+	          <div class="form-group mb-3">
+				  <!-- <div class="input-group-prepend">
 				    <span class="input-group-text" id="rImg">방 이미지</span>
-				  </div>
+				  </div> -->
 				  <div class="custom-file">
-				    <input type="file" class="custom-file-input" id="rImg" name="roomimg" aria-describedby="inputGroupFileAddon01">
-				    <label class="custom-file-label" for="rImg">탐색</label>
+				    <label class="custom-file-label" for="rImg">방 이미지</label>
+				    <input type="file" class="custom-file-input" id="rImg" name="roomimg" onchange="editRoomPhoto()" aria-describedby="inputGroupFileAddon01">
+				    <input type="hidden" id="oldRoomPhoto" name="oldRoomPhoto" value="" >		
 				  </div>
 			  </div>
+			  
 			  <div class="form-group">
 	            <label for="rppl" class="col-form-label">최대 수용 인원</label>
 	            <select class="custom-select" id="rppl" name="maxppl">
@@ -281,7 +283,7 @@
 				    <option selected>선택</option>
 				    <option value="Y">있음</option>
 				    <option value="N">없음</option>
-				  </select>
+				 </select>
 	          </div>
 	          <div class="form-group">
 	            <label for="rIntro" class="col-form-label">방 소개 </label>
@@ -307,7 +309,7 @@
             <div class="section-heading text-center">
               <h2 class="h-bold">예약 현황</h2>
               <div class="divider-header"></div>
-              <p>오늘 만날 예약 손님들</p>
+              <p>곧 만날 예약 손님들~!</p>
             </div>
           </div>
         </div>
@@ -315,8 +317,24 @@
     </div>
     <div>
       <div class="container">
-        <div id="bookingList" class="row">
-          <!-- 예약 리스트 출력 -->        
+        <div class="row">
+          <table id="bookingTable" class="table table-hover">
+             <thead id="bookingListHead">
+               <tr>
+                 <th scope="col">예약번호</th>
+                 <th scope="col">회원 아이디</th>
+                 <th scope="col">호텔 이름</th>
+                 <th scope="col">방 이름</th>
+                 <th scope="col">가격</th>
+                 <th scope="col">체크 인</th>
+                 <th scope="col">체크 아웃</th>
+                 <th scope="col">예약일</th>
+               </tr>
+             </thead>
+             <tbody id="bookingListBody">        
+          	 <!-- 예약 리스트 출력 -->
+          	 </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -325,7 +343,7 @@
 
 
   <!-- Section: 리뷰 리스트 -->
-  <section id="sectionReview" class="home-section color-dark text-center bg-white">
+  <!-- <section id="sectionReview" class="home-section color-dark text-center bg-white">
     <div class="container marginbot-50">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
@@ -360,53 +378,99 @@
       </div>
     </div>
 
-  </section>
+  </section> -->
   <!-- /Section: 리뷰 리스트 -->
 
-  <!-- Section: 멤버 리스트 -->
-  <section id="sectionMember" class="home-section nopadd-bot color-dark bg-gray text-center">
+	<!-- 멤버 수정 -->
+	<!-- edit form -->
+	<!--mem-->
+	<section id="sectionEditMember" class="home-section color-dark bg-white">
     <div class="container marginbot-50">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
           <div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
             <div class="section-heading text-center">
-              <h2 class="h-bold">회원 관리</h2>
+              <h2 class="h-bold">회원 수정</h2>
               <div class="divider-header"></div>
-              <p>Lorem ipsum dolor sit amet, agam perfecto sensibus usu at duo ut iriure.</p>
+              <p>회원 정보를 수정합니다~!~!~!!!!</p>
             </div>
           </div>
         </div>
       </div>
-
     </div>
+	<div class="container" id="mEditForm">
+		<div class="row marginbot-80">
+			<div class="col-md-6 col-md-offset-3">
+				<form role="form" class="contactForm" id="editform">
+					<div class="form-group">
+						<input type="hidden" name="idx" id="idx2">
+						<input type="email" class="form-control" name="id" id="id2"
+							placeholder="Your Email" data-rule="email"
+							data-msg="Please enter a valid email"  disabled="disabled"/>
+						<div class="validation"></div>
+					</div>
+					<div class="form-group">
+						<input type="text" name="name" class="form-control" id="name2"
+							placeholder="Your Name" data-rule="minlen:4"
+							data-msg="Please enter at least 4 chars" />
+						<div class="validation"></div>
+					</div>
+					<div class="form-group">
+						<input type="text" name="phone" class="form-control" id="phone2"
+							placeholder="Your Contact Number" data-rule="minlen:13"
+							data-msg="Please enter at least 10 numbers" />
+						<div class="validation"></div>
+					</div>
+					<div class="text-center">
+						<input type="submit" class="btn btn-skin btn-lg btn-block" placeholder="EDIT USER INFO">
+					</div>
+				</form>
 
-    <div class="container">
-     <div class="row marginbot-80">
-        <div class="col-md-8 col-md-offset-2">
-          <div id="sendmessage">Your message has been sent. Thank you!</div>
-          <div id="errormessage"></div>
-          <form action="" method="post" role="form" class="contactForm">
-            <div class="form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-              <div class="validation"></div>
+			</div>
+		</div>
+	</div>
+	</section>
+	<!-- edit USer -->
+
+  <!-- Section: 멤버 리스트 -->
+  <section id="sectionMember" class="home-section nopadd-bot color-dark bg-white text-center">
+   	<div class="container marginbot-50">
+      <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+          <div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
+            <div class="section-heading text-center">
+              <h2 class="h-bold">회원 관리</h2>
+              <div class="divider-header"></div>
+              <p>Bitcamp 회원 목록입니다. </p>
             </div>
-            <div class="form-group">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-              <div class="validation"></div>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-              <div class="validation"></div>
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-              <div class="validation"></div>
-            </div>
-            <div class="text-center"><button type="submit" class="btn btn-skin btn-lg btn-block">Send Message</button></div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
+   	
+   	<div class="container">
+		<div class="row marginbot-80">
+			<div class="col-md-8 col-md-offset-2">
+				<table class="table table-hover">
+					<thead id="memlisthead" class="thead-dark">
+						<tr>
+							<th>no</th>
+							<th>id</th>
+							<th>name</th>
+							<th>phone</th>
+							<th>verify</th>
+							<th>regdate</th>
+							<th>out</th>
+							<th>manage</th>
+						</tr>
+					</thead>
+					<tbody id="memberList">
+						<!-- ajax로 회원리스트 출력 -->							
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
   </section>
   <!-- /Section: 멤버 리스트 -->
 

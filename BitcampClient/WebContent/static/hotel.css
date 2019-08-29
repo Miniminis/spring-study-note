@@ -65,3 +65,8 @@
 	max-width: 540px; 
 	height: 300px;
 }
+
+/* 예약리스트 */
+.bookingItem {
+	border : 1px solid black;
+}

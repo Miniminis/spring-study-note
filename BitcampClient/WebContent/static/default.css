@@ -56,7 +56,58 @@
 
 
 /* 호텔 방 목록  */
-.card {
-	max-width: 540px; 
-	height: 300px;
+@media (min-width : 760px) {
+	.card {
+		width : 100%;
+		margin : 50px auto;
+		height: auto;
+	}		
+}
+
+@media (min-width: 450px) {
+	.roomImg {
+		width : 100%;
+		height: auto; 
+	}
+}
+
+
+/* 예약리스트 */
+/* #bookingList {
+	max-width: 970px;
+} */
+#bookingTable {
+	max-width: 800px;
+	margin: 10px auto;
+}
+
+/* 회원리스트 */
+.btn_manage {
+	padding: 0 12px;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.btn_manage:hover {
+	background-color: #1bbca3;
+	color: #fff;
+	display: inline-block;
+	box-sizing: border-box;
+}
+
+#bookingListHead,
+#memlisthead {
+	background-color: #1bbca3;
+	font-size: 14px;
+	color : #fff;	
+}
+
+#bookingListHead th,
+#memlisthead th {
+	text-align: center;
+}
+
+/* 숨겨진 수정폼  */
+#sectionEditMember {
+	display: none;
 }
