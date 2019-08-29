@@ -292,8 +292,8 @@ function submitAddForm() {
 	//alert('방 등록 01-1 '+data);
 	
 	$.ajax({
-		url : 'http://localhost:8080/ad/api/hotel/room/',
-		//url : 'http://13.125.249.209:8080/admin/api/hotel/room',
+		//url : 'http://localhost:8080/ad/api/hotel/room/',
+		url : 'http://13.125.249.209:8080/admin/api/hotel/room',
 		type: 'post',
 		data : data,
 		enctype: 'multipart/form-data',

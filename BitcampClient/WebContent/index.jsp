@@ -513,7 +513,7 @@
   <script src="js/owl.carousel.min.js"></script>
   <script src="js/nivo-lightbox.min.js"></script>
   <script src="js/custom.js"></script>
-  <script src="contactform/contactform.js"></script>
+  <!-- <script src="contactform/contactform.js"></script> -->
 
 </body>
 </html>
