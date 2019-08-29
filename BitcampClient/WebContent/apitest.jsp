@@ -21,7 +21,9 @@
 		</div>
 	</div>
 	
-	<!-- 룸 예약 리스트  -->
-	
+	<!-- 네이버 api test-->
+	<div id="bloglist">
+		<!-- list 출력장소 -->
+	</div>
 </body>
 </html>
