@@ -5,8 +5,8 @@ $(document).ready(function(){
 	hotelDetailPage(); //호텔상세보기
 	hotelRoomList(); //호텔별 방 리스트 
 	bookingList(); //예약 현황 리스트
-	//리뷰 리스트
 	memberList();//회원 리스트
+	//리뷰 리스트
 
 	//getUserIdx();
 	
@@ -308,6 +308,10 @@ function submitAddForm() {
         error: function (e) {
             console.log("ERROR : ", e);
             alert("방 등록에 실패하였습니다! ");
+        },
+        complete : function(){
+        	$('#hotelList').empty();
+			hotelList(1);
         }
 	})
 } 
@@ -327,11 +331,14 @@ function delRoom(roomnum) {
 					alert('방 삭제에 실패하였습니다 ㅠㅠㅠ 으엉어엉어어어어엉');
 				}
 				$('#roomListModal').modal('hide');
-				hotelList(1);
 			},
 			error : function(e) {
 				alert(e);
-			}
+			},
+			complete : function(){
+	        	$('#hotelList').empty();
+				hotelList(1);
+	        }
 		})
 	}
 }
@@ -399,17 +406,17 @@ function submitEditForm() {
 		contentType:'application/json;charset=UTF-8',
 		success : function(data) {
 			alert(data+' 개의 방 정보가 수정되었습니다!');
-			$('#editFormModal').modal('hide');
-			$('#roomListModal').modal('hide');
-			hotelList(1);
 		},
 		error : function(e) {
 			console.log("ERROR 방정보 수정 ERROR : ", e);
             alert("방 수정에 실패하였습니다ㅜㅠㅠㅠㅠ으엉어어엉! ");
-            $('#editFormModal').modal('hide');
-            $('#roomListModal').modal('hide');
+		},
+		complete : function(){
+			$('#editFormModal').modal('hide');
+			$('#roomListModal').modal('hide');
+        	$('#hotelList').empty();
 			hotelList(1);
-		}
+        }
 	})
 }
 
