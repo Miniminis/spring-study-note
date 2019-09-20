@@ -3,9 +3,31 @@ package com.firstboot.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQuery(
+		name = "findWithParam",
+		query = "from MemberEntity where idx= :fidx or username like :fusername or userid like :fuserid"
+)
+/*@NamedQuery(
+		name = "findWithIdx",
+		query = "from MemberEntity where idx= :fidx"
+)*/
+/*@NamedQueries(
+		value= {
+				@NamedQuery(
+						name = "findWithName",
+						query = "from MemberEntity where username like :fname"
+				),
+				@NamedQuery(
+						name = "findWithParam",
+						query = "from MemberEntity where idx = :fidx or username like :fname or userid like :fuid"
+				),
+		}
+)*/
 @Table(name = "memberinfo")
 public class MemberEntity {
 	

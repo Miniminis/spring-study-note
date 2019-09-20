@@ -3,6 +3,7 @@ package com.firstboot.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.firstboot.entity.MemberEntity;
 
@@ -16,4 +17,7 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Integer> {
 	public MemberEntity findByIdx(Integer idx);
 	public List<MemberEntity> findByUsernameLike(String username); //인자에는 "%"+str+"%" 형태로 지정필요
 	public List<MemberEntity> findByIdxBetween(int idx1, int idx2);
+	
+	@Query("select d from MemberEntity d order by d.idx desc")
+	public List<MemberEntity> findAllOrderByIdxDesc();
 }
