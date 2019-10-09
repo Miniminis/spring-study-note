@@ -3,7 +3,7 @@
 
 ## 숙박 중개 플랫폼, Bitcamp 프로젝트 - 관리자 페이지 
 
-## 구현화면 
+#### 구현화면 
 <img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(9).png">
 <img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(8).png">
 <img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(7).png">
