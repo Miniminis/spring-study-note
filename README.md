@@ -2,6 +2,8 @@
 > 스프링 프레임워크 공부 노트 + 프로젝트 
 
 ## 숙박 중개 플랫폼, Bitcamp 프로젝트 - 관리자 페이지 
+> [관리자 페이지 링크](http://13.125.249.209:8080/adminclient/) <br>
+> 현재 다른 페이지들은 aws 서버 운행 종료 상태로 접속불가, 관리자 페이지는 접속 가능
 
 #### 구현화면 
 <img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(9).png">
