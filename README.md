@@ -3,6 +3,13 @@
 
 ## 숙박 중개 플랫폼, Bitcamp 프로젝트 - 관리자 페이지 
 
+## 구현화면 
+<img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(9).png">
+<img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(8).png">
+<img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(7).png">
+<img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(5).png">
+<img src="https://github.com/Miniminis/Spring-study-note/blob/master/Project_Bitcamp_admin_page_screenshot/bitcamp_admin%20(3).png">
+
 #### 소스코드 
 * [전체 소스코드](https://github.com/kytsaaa6/Bitcamp)
 * [개인 소스코드 - 서버](https://github.com/Miniminis/Spring-study-note/tree/master/BitcampServer)
@@ -48,8 +55,9 @@
    * 후기 페이지 NAVER Blog Api 적용에 도움 
    
 #### 구현 중 겪었던 어려움 
-* 싱글페이지로 구성하다보니 ajax 이용해서 사진 파일을 포함한 form 을 PUT method 이용하여 구현하는 과정에서 어려움을 겪음 
+* 싱글페이지로 구성하다보니 ajax 사용해서 사진 파일을 포함한 form 을 PUT method 이용하여 구현하는 과정에서 어려움을 겪음 
     * 해결 : form 에서 사진 파일을 수정할 때에는 onchange() 매서드를 이용해서 첫번째 비동기통신을 처리하고, 전체 form을 제출할 때에는 사진 파일만 제외한 나머지 정보들만 넘겨서 두번째 비동기 통신을 해서 처리함
+    * 더 공부하고 싶은 내용 : 프론트 프레임워크 Vue 나 React를 이용하면 Single Page Application을 제작하는데 보다 수월하다고 함. 이를 배워서 적용해볼 예정  
 
 #### 프로젝트 설명 PPT 
 * 각 기능 설명 
