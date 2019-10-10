@@ -42,6 +42,20 @@
 * `AWS` 배포
     * `EC2`
     * `RDS`
+    
+    
+#### 프로젝트 설명 PPT 
+* 각 기능 설명 
+* 구현 중 어려웠던 점 
+* 개선사항 
+* [Link](https://docs.google.com/presentation/d/1hhPwEseWwrb17LAxn_P52P8mdpbJRNxlcyZXdio_ijI/edit#slide=id.g6121b993da_2_148)
+    
+    
+#### 구현 중 겪었던 어려움 
+* 싱글페이지로 구성하다보니 ajax 사용해서 사진 파일을 포함한 form 을 PUT method 이용하여 구현하는 과정에서 어려움을 겪음 
+    * 해결 : form 에서 사진 파일을 수정할 때에는 onchange() 매서드를 이용해서 첫번째 비동기통신을 처리하고, 전체 form을 제출할 때에는 사진 파일만 제외한 나머지 정보들만 넘겨서 두번째 비동기 통신을 해서 처리함
+    * 더 공부하고 싶은 내용 : 프론트 프레임워크 Vue 나 React를 이용하면 Single Page Application을 제작하는데 보다 수월하다고 함. 이를 배워서 적용해볼 예정  
+
 
 #### 버전설명
 * 자세한 사항은 본 repository의 커밋 내역 중 [Bitcamp]를 참고
@@ -55,14 +69,3 @@
 * v1
    * 관리자 페이지 v1 완성
    * 후기 페이지 NAVER Blog Api 적용에 도움 
-   
-#### 구현 중 겪었던 어려움 
-* 싱글페이지로 구성하다보니 ajax 사용해서 사진 파일을 포함한 form 을 PUT method 이용하여 구현하는 과정에서 어려움을 겪음 
-    * 해결 : form 에서 사진 파일을 수정할 때에는 onchange() 매서드를 이용해서 첫번째 비동기통신을 처리하고, 전체 form을 제출할 때에는 사진 파일만 제외한 나머지 정보들만 넘겨서 두번째 비동기 통신을 해서 처리함
-    * 더 공부하고 싶은 내용 : 프론트 프레임워크 Vue 나 React를 이용하면 Single Page Application을 제작하는데 보다 수월하다고 함. 이를 배워서 적용해볼 예정  
-
-#### 프로젝트 설명 PPT 
-* 각 기능 설명 
-* 구현 중 어려웠던 점 
-* 개선사항 
-* [Link](https://docs.google.com/presentation/d/1hhPwEseWwrb17LAxn_P52P8mdpbJRNxlcyZXdio_ijI/edit#slide=id.g6121b993da_2_148)
